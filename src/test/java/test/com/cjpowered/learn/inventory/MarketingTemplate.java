@@ -9,7 +9,7 @@ import com.cjpowered.learn.marketing.Season;
 public class MarketingTemplate implements MarketingInfo {
 
     @Override
-    public boolean onSale(final Item item) {
+    public boolean onSale(final Item item, LocalDate when) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
