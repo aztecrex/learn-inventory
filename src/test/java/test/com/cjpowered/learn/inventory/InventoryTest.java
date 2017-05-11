@@ -1,6 +1,6 @@
 package test.com.cjpowered.learn.inventory;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 import java.util.List;

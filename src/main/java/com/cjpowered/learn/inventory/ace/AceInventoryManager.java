@@ -9,7 +9,7 @@ import com.cjpowered.learn.inventory.Order;
 
 public final class AceInventoryManager implements InventoryManager {
 
-     @Override
+    @Override
     public List<Order> getOrders(final LocalDate today) {
         return Collections.emptyList();
     }

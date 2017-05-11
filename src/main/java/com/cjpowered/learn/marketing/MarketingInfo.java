@@ -12,7 +12,8 @@ public interface MarketingInfo {
      * @param item
      *            item to query. Assumes item equality as defined by
      *            {@link InventoryDatabase}.
-     * @param when the date to check
+     * @param when
+     *            the date to check
      *
      * @return fetched value
      */
