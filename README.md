@@ -68,6 +68,20 @@ priority order even if that priority changes
 - If requirements are incomplete or in conflict, your teacher will act as
 the product owner and help clarify
 
+## Technical Notes and Contracts
+
+- you deliver software through progressive enhancements to the AceInventoryManager
+class's #getOrders(LocalDate) method.
+- you are free to implement the Item interface as needed for your enhancements. The
+ordering department will adjust their own database implementation to ensure your
+Item instance data is returned when needed.
+- Item equality is outside your scope. The ordering department defines item equality
+via the standard Java #equals(Object) method. You must assume that two Item instances
+are equals if and only if they are the exact same instance. In other words, two items,
+created by two different construction calls are, by definition, not equal even if they
+contain the same instance data
+ 
+
 ## The Business Rules
 
 Here is the company's best shot at the inventory rules
