@@ -8,9 +8,9 @@ import java.time.LocalDate;
 import org.junit.Test;
 
 import com.cjpowered.learn.inventory.Item;
+import com.cjpowered.learn.inventory.MarketingSpec;
 import com.cjpowered.learn.inventory.StandardStockCalculator;
 import com.cjpowered.learn.inventory.StockCalculator;
-import com.cjpowered.learn.inventory.MarketingSpec;
 import com.cjpowered.learn.marketing.MarketingInfo;
 import com.cjpowered.learn.marketing.Season;
 
@@ -39,11 +39,11 @@ public class StandardStockCalculatorTest {
 
         // given
         final int normalLevel = 175;
-        final MarketingSpec spec = new MarketingSpec(normalLevel, Season.Summer);
+        final MarketingSpec spec = new MarketingSpec(Season.Summer);
         final StockCalculator calc = new StandardStockCalculator();
 
         // when
-        final int actual = calc.requiredStock(spec);
+        final int actual = calc.requiredStock(normalLevel, spec);
 
         assertEquals(normalLevel, actual);
 

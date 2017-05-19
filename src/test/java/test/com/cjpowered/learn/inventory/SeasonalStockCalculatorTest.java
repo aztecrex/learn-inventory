@@ -62,12 +62,12 @@ public class SeasonalStockCalculatorTest {
         // given
         final Season season = Season.Summer;
         final int normalLevel = 175;
-        final MarketingSpec spec = new MarketingSpec(normalLevel, season);
+        final MarketingSpec spec = new MarketingSpec(season);
 
         final StockCalculator calc = new SeasonalStockCalculator(season);
 
         // when
-        final int actual = calc.requiredStock(spec);
+        final int actual = calc.requiredStock(normalLevel, spec);
 
         assertEquals(normalLevel * 2, actual);
 
@@ -79,12 +79,12 @@ public class SeasonalStockCalculatorTest {
         // given
         final Season season = Season.Summer;
         final int normalLevel = 175;
-        final MarketingSpec spec = new MarketingSpec(normalLevel, season);
+        final MarketingSpec spec = new MarketingSpec(season);
 
         final StockCalculator calc = new SeasonalStockCalculator(Season.Winter);
 
         // when
-        final int actual = calc.requiredStock(spec);
+        final int actual = calc.requiredStock(normalLevel, spec);
 
         assertEquals(0, actual);
 
