@@ -52,7 +52,6 @@ public class ManagerTest {
 
     }
 
-
     @Test
     public void managerReturnsOrdersForItems() {
 

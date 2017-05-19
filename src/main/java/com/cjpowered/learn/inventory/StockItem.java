@@ -11,15 +11,14 @@ public class StockItem implements Item {
 
     final int normalLevel;
 
-
     final Set<StockCalculator> requiredStockCalculators;
 
     final int packageSize;
 
     final Schedule schedule;
 
-    public StockItem(final int normalLevel, int packageSize, final Collection<StockCalculator> stockCalculators,
-            Schedule schedule) {
+    public StockItem(final int normalLevel, final int packageSize, final Collection<StockCalculator> stockCalculators,
+            final Schedule schedule) {
         this.normalLevel = normalLevel;
         this.packageSize = packageSize;
         this.requiredStockCalculators = new HashSet<>(stockCalculators);

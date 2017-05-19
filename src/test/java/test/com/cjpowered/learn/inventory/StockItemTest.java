@@ -198,41 +198,43 @@ public class StockItemTest {
 
     }
 
-    @Test public void doesNotOrderOffSchedule() {
-        
+    @Test
+    public void doesNotOrderOffSchedule() {
+
         // given
-        Schedule schedule = mock(Schedule.class);
+        final Schedule schedule = mock(Schedule.class);
         when(schedule.canOrder(any())).thenReturn(false);
         final StockCalculator calc = mock(StockCalculator.class);
         when(calc.requiredStock(any(), anyInt(), any(), any())).thenReturn(1000);
-        final Item item = new StockItem(2 /*ignored*/ ,1,Arrays.asList(new StandardStockCalculator()), schedule);
-        
+        final Item item = new StockItem(2 /* ignored */ , 1, Arrays.asList(new StandardStockCalculator()), schedule);
+
         // when
         final int actual = item.computeOrderQuantity(this.db, this.minfo, this.today);
 
         // then
         assertEquals(0, actual);
-        
+
     }
-    
-    @Test public void ordersOnSchedule() {
-        
+
+    @Test
+    public void ordersOnSchedule() {
+
         // given
         final int requiredStock = 1000;
         final int currentStock = 100;
-        
-        Schedule schedule = mock(Schedule.class);
+
+        final Schedule schedule = mock(Schedule.class);
         when(schedule.canOrder(any())).thenReturn(true);
         final StockCalculator calc = mock(StockCalculator.class);
         when(calc.requiredStock(any(), anyInt(), any(), any())).thenReturn(requiredStock);
-        final Item item = new StockItem(2 /*ignored*/ ,1,Collections.singletonList(calc), schedule);
-        when(db.onHand(item)).thenReturn(currentStock);
+        final Item item = new StockItem(2 /* ignored */ , 1, Collections.singletonList(calc), schedule);
+        when(this.db.onHand(item)).thenReturn(currentStock);
         // when
         final int actual = item.computeOrderQuantity(this.db, this.minfo, this.today);
 
         // then
         assertEquals(requiredStock - currentStock, actual);
-        
+
     }
-    
+
 }

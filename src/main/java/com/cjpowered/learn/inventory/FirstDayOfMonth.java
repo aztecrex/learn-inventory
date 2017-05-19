@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class FirstDayOfMonth implements Schedule {
 
     @Override
-    public boolean canOrder(LocalDate any) {
+    public boolean canOrder(final LocalDate any) {
         return any.getDayOfMonth() == 1;
     }
 
