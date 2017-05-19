@@ -10,7 +10,7 @@ public class StockItem implements Item {
 
     @Override
     public int computeOrderQuantity(InventoryDatabase database) {
-        return requiredLevel - database.onHand(this);
+        return Math.max(0, requiredLevel - database.onHand(this));
     }
     
     

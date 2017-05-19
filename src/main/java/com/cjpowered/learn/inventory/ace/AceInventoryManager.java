@@ -25,7 +25,7 @@ public final class AceInventoryManager implements InventoryManager {
 
         for (Item item : items) {
             final int orderQuantity = item.computeOrderQuantity(database);
-            if (orderQuantity >= 0) {
+            if (orderQuantity > 0) {
                 final Order order = new Order(item, orderQuantity);
                 orders.add(order);
             }
