@@ -10,7 +10,7 @@ import com.cjpowered.learn.marketing.MarketingInfo;
 
 public class StockItem implements Item {
 
-    final int requiredLevel;
+    final int normalLevel;
 
     final boolean firstDayOfMonthOnly;
 
@@ -26,7 +26,7 @@ public class StockItem implements Item {
 
     public StockItem(final int normalLevel, final Collection<RequiredStockCalculator> requiredStockCalculators,
             boolean firstDayOfMonthOnly) {
-        this.requiredLevel = normalLevel;
+        this.normalLevel = normalLevel;
         this.requiredStockCalculators = new HashSet<>(requiredStockCalculators);
         this.firstDayOfMonthOnly = firstDayOfMonthOnly;
     }
@@ -39,7 +39,7 @@ public class StockItem implements Item {
         
         int requiredLevel = 0;
         for(RequiredStockCalculator calc : requiredStockCalculators) {
-            requiredLevel = Math.max(requiredLevel, calc.requiredStock(this, requiredLevel, database, marketingInfo, when));
+            requiredLevel = Math.max(requiredLevel, calc.requiredStock(this, this.normalLevel, database, marketingInfo, when));
         }
 
         final int onHand = database.onHand(this);
