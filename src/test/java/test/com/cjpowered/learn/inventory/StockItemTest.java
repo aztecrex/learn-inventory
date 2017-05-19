@@ -16,7 +16,7 @@ import com.cjpowered.learn.inventory.StockCalculator;
 import com.cjpowered.learn.inventory.StockItem;
 import com.cjpowered.learn.marketing.MarketingInfo;
 
-public class ItemTest {
+public class StockItemTest {
 
     InventoryDatabase db;
     MarketingInfo minfo;
