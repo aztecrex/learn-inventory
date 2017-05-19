@@ -59,7 +59,7 @@ public class InventoryTest {
         // given
         final int requiredLevel = 15;
         final int currentLevel = 12;
-        final Item item = new StockItem(requiredLevel);
+        final Item item = new StockItem(requiredLevel, Arrays.asList(new OnSaleCalculator()));
         when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
         when(this.db.onHand(item)).thenReturn(currentLevel);
         final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
@@ -79,7 +79,7 @@ public class InventoryTest {
         // given
         final int requiredLevel = 15;
         final int currentLevel = 25;
-        final Item item = new StockItem(requiredLevel);
+        final Item item = new StockItem(requiredLevel, Arrays.asList(new OnSaleCalculator()));
         when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
         when(this.db.onHand(item)).thenReturn(currentLevel);
         final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
@@ -97,7 +97,7 @@ public class InventoryTest {
         // given
         final int requiredLevel = 15;
         final int currentLevel = 15;
-        final Item item = new StockItem(requiredLevel);
+        final Item item = new StockItem(requiredLevel, Arrays.asList(new OnSaleCalculator()));
         when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
         when(this.db.onHand(item)).thenReturn(currentLevel);
         final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
@@ -114,7 +114,7 @@ public class InventoryTest {
     public void onSale() {
         final int requiredLevel = 15;
         final int currentLevel = 11;
-        final Item item = new StockItem(requiredLevel);
+        final Item item = new StockItem(requiredLevel, Arrays.asList(new OnSaleCalculator()));
         when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
         when(this.db.onHand(item)).thenReturn(currentLevel);
         when(this.minfo.onSale(item, this.today)).thenReturn(true);
@@ -230,7 +230,7 @@ public class InventoryTest {
         final LocalDate today = LocalDate.of(2112, 9, 1);
         final int requiredLevel = 15;
         final int currentLevel = 9;
-        final Item item = new StockItem(requiredLevel, true);
+        final Item item = new StockItem(requiredLevel, Arrays.asList(new OnSaleCalculator()), true);
         when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
         when(this.db.onHand(item)).thenReturn(currentLevel);
         final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
@@ -251,7 +251,7 @@ public class InventoryTest {
         final LocalDate today = LocalDate.of(2112, 9, 2);
         final int requiredLevel = 15;
         final int currentLevel = 9;
-        final Item item = new StockItem(requiredLevel, true);
+        final Item item = new StockItem(requiredLevel, Arrays.asList(new OnSaleCalculator()),true);
         when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
         when(this.db.onHand(item)).thenReturn(currentLevel);
         final InventoryManager im = new AceInventoryManager(this.db, this.minfo);

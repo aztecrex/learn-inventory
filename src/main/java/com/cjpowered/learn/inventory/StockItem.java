@@ -16,12 +16,18 @@ public class StockItem implements Item {
 
     final Set<RequiredStockCalculator> requiredStockCalculators;
 
+    @Deprecated
     public StockItem(final int requiredLevel) {
         this(requiredLevel, false);
     }
 
+    @Deprecated
     public StockItem(final int normalLevel, final boolean firstDayOfMonthOnly) {
         this(normalLevel, Collections.singletonList(new OnSaleCalculator()), firstDayOfMonthOnly);
+    }
+
+    public StockItem(final int normalLevel, final Collection<RequiredStockCalculator> requiredStockCalculators) {
+        this(normalLevel, requiredStockCalculators, false);
     }
 
     public StockItem(final int normalLevel, final Collection<RequiredStockCalculator> requiredStockCalculators,
