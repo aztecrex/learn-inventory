@@ -11,6 +11,7 @@ import java.util.Collections;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.cjpowered.learn.inventory.AnyDay;
 import com.cjpowered.learn.inventory.InventoryDatabase;
 import com.cjpowered.learn.inventory.Item;
 import com.cjpowered.learn.inventory.Schedule;
@@ -40,7 +41,7 @@ public class StockItemTest {
 
         final StockCalculator calc1 = mock(StockCalculator.class);
         when(calc1.requiredStock(any(), anyInt(), any(), any())).thenReturn(currentLevel - 1);
-        final Item item = new StockItem(20, Arrays.asList(calc1), false);
+        final Item item = new StockItem(20, 1, Arrays.asList(calc1), new AnyDay());
         when(this.db.onHand(item)).thenReturn(currentLevel);
 
         // when
@@ -60,7 +61,7 @@ public class StockItemTest {
 
         final StockCalculator calc1 = mock(StockCalculator.class);
         when(calc1.requiredStock(any(), anyInt(), any(), any())).thenReturn(currentLevel + deficiency);
-        final Item item = new StockItem(20, Arrays.asList(calc1), false);
+        final Item item = new StockItem(20, 1, Arrays.asList(calc1), new AnyDay());
         when(this.db.onHand(item)).thenReturn(currentLevel);
 
         // when
@@ -82,7 +83,7 @@ public class StockItemTest {
         when(calc1.requiredStock(any(), anyInt(), any(), any())).thenReturn(calc1Return);
         final StockCalculator calc2 = mock(StockCalculator.class);
         when(calc2.requiredStock(any(), anyInt(), any(), any())).thenReturn(calc1Return / 2);
-        final Item item = new StockItem(20, Arrays.asList(calc1, calc2), false);
+        final Item item = new StockItem(20, 1, Arrays.asList(calc1, calc2), new AnyDay());
         when(this.db.onHand(item)).thenReturn(currentLevel);
 
         // when
@@ -101,7 +102,7 @@ public class StockItemTest {
 
         final StockCalculator calc1 = mock(StockCalculator.class);
         when(calc1.requiredStock(any(), anyInt(), any(), any())).thenReturn(currentLevel);
-        final Item item = new StockItem(20, Arrays.asList(calc1), false);
+        final Item item = new StockItem(20, 1, Arrays.asList(calc1), new AnyDay());
         when(this.db.onHand(item)).thenReturn(currentLevel);
 
         // when
@@ -122,7 +123,7 @@ public class StockItemTest {
 
         final StockCalculator calc = mock(StockCalculator.class);
         when(calc.requiredStock(any(), anyInt(), any(), any())).thenReturn(requiredLevel);
-        final Item item = new StockItem(2 /* ignored */, Arrays.asList(calc), false, bulkPackageSize);
+        final Item item = new StockItem(2 /* ignored */, bulkPackageSize, Arrays.asList(calc), new AnyDay());
         when(this.db.onHand(item)).thenReturn(currentLevel);
 
         // when
@@ -144,7 +145,7 @@ public class StockItemTest {
 
         final StockCalculator calc = mock(StockCalculator.class);
         when(calc.requiredStock(any(), anyInt(), any(), any())).thenReturn(requiredLevel);
-        final Item item = new StockItem(2 /* ignored */, Arrays.asList(calc), false, bulkPackageSize);
+        final Item item = new StockItem(2 /* ignored */, bulkPackageSize, Arrays.asList(calc), new AnyDay());
         when(this.db.onHand(item)).thenReturn(currentLevel);
 
         // when
@@ -165,7 +166,7 @@ public class StockItemTest {
 
         final StockCalculator calc = mock(StockCalculator.class);
         when(calc.requiredStock(any(), anyInt(), any(), any())).thenReturn(requiredLevel);
-        final Item item = new StockItem(2 /* ignored */, Arrays.asList(calc), false, bulkPackageSize);
+        final Item item = new StockItem(2 /* ignored */, bulkPackageSize, Arrays.asList(calc), new AnyDay());
         when(this.db.onHand(item)).thenReturn(currentLevel);
 
         // when
@@ -186,7 +187,7 @@ public class StockItemTest {
 
         final StockCalculator calc = mock(StockCalculator.class);
         when(calc.requiredStock(any(), anyInt(), any(), any())).thenReturn(requiredLevel);
-        final Item item = new StockItem(2 /* ignored */, Arrays.asList(calc), false, bulkPackageSize);
+        final Item item = new StockItem(2 /* ignored */, bulkPackageSize, Arrays.asList(calc), new AnyDay());
         when(this.db.onHand(item)).thenReturn(currentLevel);
 
         // when

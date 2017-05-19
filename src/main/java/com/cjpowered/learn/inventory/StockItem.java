@@ -18,23 +18,6 @@ public class StockItem implements Item {
 
     final Schedule schedule;
 
-    public StockItem(final int normalLevel, final Collection<StockCalculator> requiredStockCalculators) {
-        this(normalLevel, requiredStockCalculators, false);
-    }
-
-    public StockItem(final int normalLevel, final Collection<StockCalculator> requiredStockCalculators,
-            final boolean firstDayOfMonthOnly, final int packageSize) {
-        this.normalLevel = normalLevel;
-        this.requiredStockCalculators = new HashSet<>(requiredStockCalculators);
-        this.packageSize = packageSize;
-        this.schedule = firstDayOfMonthOnly ? new FirstDayOfMonth() : new AnyDay();
-    }
-
-    public StockItem(final int normalLevel, final Collection<StockCalculator> requiredStockCalculators,
-            final boolean firstDayOfMonthOnly) {
-        this(normalLevel, requiredStockCalculators, firstDayOfMonthOnly, 1);
-    }
-
     public StockItem(final int normalLevel, int packageSize, final Collection<StockCalculator> stockCalculators,
             Schedule schedule) {
         this.normalLevel = normalLevel;
