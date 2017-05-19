@@ -12,14 +12,15 @@ import com.cjpowered.learn.marketing.MarketingInfo;
 public interface Item {
 
     /**
-     * Compute the order quantity.
+     * Compute the order quantity for a given day.
      *
      * @param database
+     * 
      * @param marketingInfo
      *            marketing info service
      * @param when
      *            date for which computation is being made
-     * @return
+     * @return the quantity to order. This will never be negative.
      */
     int computeOrderQuantity(InventoryDatabase database, MarketingInfo marketingInfo, LocalDate when);
 
