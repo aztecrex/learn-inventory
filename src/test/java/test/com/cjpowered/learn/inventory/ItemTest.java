@@ -49,6 +49,26 @@ public class ItemTest {
     }
 
     @Test
+    public void itemUnderstocked() {
+
+        // given
+        final int currentLevel = 7;
+        final int deficiency = 3;
+
+        final StockCalculator calc1 = mock(StockCalculator.class);
+        when(calc1.requiredStock(any(), anyInt(), any(), any(), any())).thenReturn(currentLevel + deficiency);
+        final Item item = new StockItem(20, Arrays.asList(calc1), false);
+        when(this.db.onHand(item)).thenReturn(currentLevel);
+
+        // when
+        final int actual = item.computeOrderQuantity(this.db, this.minfo, this.today);
+
+        // then
+        assertEquals(deficiency, actual);
+
+    }
+
+    @Test
     public void itemPicksLargestStockCalculation() {
 
         // given
