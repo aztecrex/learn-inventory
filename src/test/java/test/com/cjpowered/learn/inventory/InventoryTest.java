@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,8 +14,9 @@ import org.junit.Test;
 import com.cjpowered.learn.inventory.InventoryDatabase;
 import com.cjpowered.learn.inventory.InventoryManager;
 import com.cjpowered.learn.inventory.Item;
+import com.cjpowered.learn.inventory.OnSaleCalculator;
 import com.cjpowered.learn.inventory.Order;
-import com.cjpowered.learn.inventory.SeasonalItem;
+import com.cjpowered.learn.inventory.SeasonalCalculator;
 import com.cjpowered.learn.inventory.StockItem;
 import com.cjpowered.learn.inventory.ace.AceInventoryManager;
 /*
@@ -133,7 +135,9 @@ public class InventoryTest {
         final int requiredLevel = 15;
         final int currentLevel = 11;
         final Season season = Season.Fall;
-        final Item item = new SeasonalItem(requiredLevel, season);
+        final Item item = new StockItem(requiredLevel,
+                Arrays.asList(new OnSaleCalculator(), new SeasonalCalculator(season)),
+                false);
         when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
         when(this.db.onHand(item)).thenReturn(currentLevel);
         when(this.minfo.season(this.today)).thenReturn(season);
@@ -154,7 +158,9 @@ public class InventoryTest {
         final int requiredLevel = 15;
         final int currentLevel = 11;
         final Season season = Season.Fall;
-        final Item item = new SeasonalItem(requiredLevel, Season.Spring);
+        final Item item = new StockItem(requiredLevel,
+                Arrays.asList(new OnSaleCalculator(), new SeasonalCalculator(Season.Spring)),
+                false);
         when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
         when(this.db.onHand(item)).thenReturn(currentLevel);
         when(this.minfo.season(this.today)).thenReturn(season);
@@ -175,7 +181,9 @@ public class InventoryTest {
         final int requiredLevel = 25;
         final int currentLevel = 11;
         final Season season = Season.Fall;
-        final Item item = new SeasonalItem(requiredLevel, season);
+        final Item item = new StockItem(requiredLevel,
+                Arrays.asList(new OnSaleCalculator(), new SeasonalCalculator(season)),
+                false);
         when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
         when(this.db.onHand(item)).thenReturn(currentLevel);
         when(this.minfo.season(this.today)).thenReturn(season);
@@ -197,7 +205,9 @@ public class InventoryTest {
         final int requiredLevel = 15;
         final int currentLevel = 11;
         final Season season = Season.Fall;
-        final Item item = new SeasonalItem(requiredLevel, season);
+        final Item item = new StockItem(requiredLevel,
+                Arrays.asList(new OnSaleCalculator(), new SeasonalCalculator(season)),
+                false);
         when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
         when(this.db.onHand(item)).thenReturn(currentLevel);
         when(this.minfo.season(this.today)).thenReturn(season);
