@@ -34,8 +34,7 @@ public class StockItem implements Item {
 
         int requiredLevel = 0;
         for (final StockCalculator calc : this.requiredStockCalculators) {
-            requiredLevel = Math.max(requiredLevel,
-                    calc.requiredStock(this, this.normalLevel, marketingInfo, when));
+            requiredLevel = Math.max(requiredLevel, calc.requiredStock(this, this.normalLevel, marketingInfo, when));
         }
 
         final int onHand = database.onHand(this);

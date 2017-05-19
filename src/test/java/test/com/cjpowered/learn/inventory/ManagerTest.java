@@ -55,8 +55,6 @@ public class ManagerTest {
 
     }
 
-
-
     @Test
     public void orderIfFirstDayOfMonth() {
         // given

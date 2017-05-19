@@ -7,7 +7,6 @@ import java.time.LocalDate;
 
 import org.junit.Test;
 
-import com.cjpowered.learn.inventory.InventoryDatabase;
 import com.cjpowered.learn.inventory.Item;
 import com.cjpowered.learn.inventory.SeasonalStockCalculator;
 import com.cjpowered.learn.inventory.StockCalculator;
@@ -20,7 +19,6 @@ public class SeasonalStockCalculatorTest {
     public void increaseDuringSeason() {
 
         // given
-        final InventoryDatabase db = mock(InventoryDatabase.class);
         final MarketingInfo minfo = mock(MarketingInfo.class);
         final LocalDate today = LocalDate.ofEpochDay(900039);
         final Item item = mock(Item.class);
@@ -41,7 +39,6 @@ public class SeasonalStockCalculatorTest {
     public void noIncreaseNormally() {
 
         // given
-        final InventoryDatabase db = mock(InventoryDatabase.class);
         final MarketingInfo minfo = mock(MarketingInfo.class);
         final LocalDate today = LocalDate.ofEpochDay(900039);
         final Item item = mock(Item.class);
