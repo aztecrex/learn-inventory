@@ -19,19 +19,19 @@ public class StockItem implements Item {
 
     /**
      * Create a stock item
-     * 
+     *
      * @param normalLevel
      *            normal stock level. actual required stock level can be based
      *            on this
-     * 
+     *
      * @param packageSize
      *            number of units in each package when ordered
-     * 
+     *
      * @param stockCalculators
      *            required stock level calculators. There is no default
      *            calculator so at least a {@link StandardStockCalculator}
      *            should be provided
-     * 
+     *
      * @param schedule
      *            schedule on which orders can be placed. If no restrictions,
      *            use {@link AnyDay}.

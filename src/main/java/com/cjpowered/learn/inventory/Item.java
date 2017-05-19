@@ -15,7 +15,7 @@ public interface Item {
      * Compute the order quantity for a given day.
      *
      * @param database
-     * 
+     *
      * @param marketingInfo
      *            marketing info service
      * @param when
