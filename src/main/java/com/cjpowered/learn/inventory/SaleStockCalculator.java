@@ -13,8 +13,8 @@ public class SaleStockCalculator implements StockCalculator {
     }
 
     @Override
-    public int requiredStock(int normalLevel, MarketingSpec spec) {
-        return normalLevel + 20;
+    public int requiredStock(int normalLevel, MarketingSpec marketingSpec) {
+        return marketingSpec.onSale ? normalLevel + 20 : 0;
     }
 
 }

@@ -39,7 +39,7 @@ public class StandardStockCalculatorTest {
 
         // given
         final int normalLevel = 175;
-        final MarketingSpec spec = new MarketingSpec(Season.Summer);
+        final MarketingSpec spec = new MarketingSpec(Season.Summer, false);
         final StockCalculator calc = new StandardStockCalculator();
 
         // when
