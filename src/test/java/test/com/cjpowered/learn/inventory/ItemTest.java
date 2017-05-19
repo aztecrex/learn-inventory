@@ -36,7 +36,7 @@ public class ItemTest {
         final int currentLevel = 7;
 
         final StockCalculator calc1 = mock(StockCalculator.class);
-        when(calc1.requiredStock(any(), anyInt(), any(), any(), any())).thenReturn(currentLevel - 1);
+        when(calc1.requiredStock(any(), anyInt(), any(), any())).thenReturn(currentLevel - 1);
         final Item item = new StockItem(20, Arrays.asList(calc1), false);
         when(this.db.onHand(item)).thenReturn(currentLevel);
 
@@ -56,7 +56,7 @@ public class ItemTest {
         final int deficiency = 3;
 
         final StockCalculator calc1 = mock(StockCalculator.class);
-        when(calc1.requiredStock(any(), anyInt(), any(), any(), any())).thenReturn(currentLevel + deficiency);
+        when(calc1.requiredStock(any(), anyInt(), any(), any())).thenReturn(currentLevel + deficiency);
         final Item item = new StockItem(20, Arrays.asList(calc1), false);
         when(this.db.onHand(item)).thenReturn(currentLevel);
 
@@ -76,9 +76,9 @@ public class ItemTest {
 
         final StockCalculator calc1 = mock(StockCalculator.class);
         final int calc1Return = 1000;
-        when(calc1.requiredStock(any(), anyInt(), any(), any(), any())).thenReturn(calc1Return);
+        when(calc1.requiredStock(any(), anyInt(), any(), any())).thenReturn(calc1Return);
         final StockCalculator calc2 = mock(StockCalculator.class);
-        when(calc2.requiredStock(any(), anyInt(), any(), any(), any())).thenReturn(calc1Return / 2);
+        when(calc2.requiredStock(any(), anyInt(), any(), any())).thenReturn(calc1Return / 2);
         final Item item = new StockItem(20, Arrays.asList(calc1, calc2), false);
         when(this.db.onHand(item)).thenReturn(currentLevel);
 
@@ -97,7 +97,7 @@ public class ItemTest {
         final int currentLevel = 7;
 
         final StockCalculator calc1 = mock(StockCalculator.class);
-        when(calc1.requiredStock(any(), anyInt(), any(), any(), any())).thenReturn(currentLevel);
+        when(calc1.requiredStock(any(), anyInt(), any(), any())).thenReturn(currentLevel);
         final Item item = new StockItem(20, Arrays.asList(calc1), false);
         when(this.db.onHand(item)).thenReturn(currentLevel);
 

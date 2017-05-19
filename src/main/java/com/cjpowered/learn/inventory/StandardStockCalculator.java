@@ -7,8 +7,8 @@ import com.cjpowered.learn.marketing.MarketingInfo;
 public class StandardStockCalculator implements StockCalculator {
 
     @Override
-    public int requiredStock(final Item item, final int normalLevel, final InventoryDatabase database,
-            final MarketingInfo marketingInfo, final LocalDate when) {
+    public int requiredStock(final Item item, final int normalLevel, final MarketingInfo marketingInfo,
+            final LocalDate when) {
         return normalLevel;
     }
 

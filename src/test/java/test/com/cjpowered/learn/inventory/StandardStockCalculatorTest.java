@@ -28,7 +28,7 @@ public class StandardStockCalculatorTest {
         final StockCalculator calc = new StandardStockCalculator();
 
         // when
-        final int actual = calc.requiredStock(item, normalLevel, db, minfo, today);
+        final int actual = calc.requiredStock(item, normalLevel, minfo, today);
 
         assertEquals(normalLevel, actual);
 

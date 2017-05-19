@@ -14,8 +14,8 @@ public class SeasonalStockCalculator implements StockCalculator {
     }
 
     @Override
-    public int requiredStock(final Item item, final int normalLevel, final InventoryDatabase database,
-            final MarketingInfo marketingInfo, final LocalDate when) {
+    public int requiredStock(final Item item, final int normalLevel, final MarketingInfo marketingInfo,
+            final LocalDate when) {
         return this.season == marketingInfo.season(when) ? normalLevel * 2 : 0;
     }
 

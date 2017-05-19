@@ -29,7 +29,7 @@ public class SaleStockCalculatorTest {
         final StockCalculator calc = new SaleStockCalculator();
 
         // when
-        final int actual = calc.requiredStock(item, normalLevel, db, minfo, today);
+        final int actual = calc.requiredStock(item, normalLevel, minfo, today);
 
         assertEquals(normalLevel + 20, actual);
 
@@ -49,7 +49,7 @@ public class SaleStockCalculatorTest {
         final StockCalculator calc = new SaleStockCalculator();
 
         // when
-        final int actual = calc.requiredStock(item, normalLevel, db, minfo, today);
+        final int actual = calc.requiredStock(item, normalLevel, minfo, today);
 
         assertEquals(0, actual);
 

@@ -31,7 +31,7 @@ public class SeasonalStockCalculatorTest {
         final StockCalculator calc = new SeasonalStockCalculator(season);
 
         // when
-        final int actual = calc.requiredStock(item, normalLevel, db, minfo, today);
+        final int actual = calc.requiredStock(item, normalLevel, minfo, today);
 
         assertEquals(normalLevel * 2, actual);
 
@@ -52,7 +52,7 @@ public class SeasonalStockCalculatorTest {
         final StockCalculator calc = new SeasonalStockCalculator(Season.Fall);
 
         // when
-        final int actual = calc.requiredStock(item, normalLevel, db, minfo, today);
+        final int actual = calc.requiredStock(item, normalLevel, minfo, today);
 
         assertEquals(0, actual);
 
