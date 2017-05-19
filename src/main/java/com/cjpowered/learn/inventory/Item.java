@@ -13,12 +13,10 @@ public interface Item {
 
     /**
      * Compute the order quantity.
-     *
+     * 
      * @param database
-     * @param marketingInfo
-     *            TODO
-     * @param when
-     *            TODO
+     * @param marketingInfo TODO
+     * @param when TODO
      * @return
      */
     int computeOrderQuantity(InventoryDatabase database, MarketingInfo marketingInfo, LocalDate when);

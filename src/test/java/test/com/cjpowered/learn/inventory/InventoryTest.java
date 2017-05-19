@@ -30,221 +30,18 @@ public class InventoryTest {
     InventoryDatabase db;
     MarketingInfo minfo;
     LocalDate today;
-
-    @Test
-    public void noOrderIfNotFirstDayOfMonth() {
-        // given
-        final LocalDate today = LocalDate.of(2112, 9, 2);
-        final int requiredLevel = 15;
-        final int currentLevel = 9;
-        final Item item = new StockItem(requiredLevel, true);
-        when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
-        when(this.db.onHand(item)).thenReturn(currentLevel);
-        final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
-
-        // when
-        final List<Order> actual = im.getOrders(today);
-
-        // then
-        assertTrue(actual.isEmpty());
-
+    
+    @Before public void setup() {
+        db = mock(InventoryDatabase.class);
+        minfo = mock(MarketingInfo.class);
+        today = LocalDate.of(2222, 12, 17);
     }
-
-    @Test
-    public void onSale() {
-        final int requiredLevel = 15;
-        final int currentLevel = 11;
-        final Item item = new StockItem(requiredLevel);
-        when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
-        when(this.db.onHand(item)).thenReturn(currentLevel);
-        when(this.minfo.onSale(item, this.today)).thenReturn(true);
-        final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
-
-        // when
-        final List<Order> actual = im.getOrders(this.today);
-
-        // then
-        assertEquals(1, actual.size());
-        assertEquals(item, actual.get(0).item);
-        assertEquals(requiredLevel + 20 - currentLevel, actual.get(0).quantity);
-
-    }
-
-    @Test
-    public void orderIfFirstDayOfMonth() {
-        // given
-        final LocalDate today = LocalDate.of(2112, 9, 1);
-        final int requiredLevel = 15;
-        final int currentLevel = 9;
-        final Item item = new StockItem(requiredLevel, true);
-        when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
-        when(this.db.onHand(item)).thenReturn(currentLevel);
-        final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
-
-        // when
-        final List<Order> actual = im.getOrders(today);
-
-        // then
-        assertEquals(1, actual.size());
-        assertEquals(item, actual.get(0).item);
-        assertEquals(requiredLevel - currentLevel, actual.get(0).quantity);
-
-    }
-
-    @Test
-    public void orderToLevel() {
-        // given
-        final int requiredLevel = 15;
-        final int currentLevel = 12;
-        final Item item = new StockItem(requiredLevel);
-        when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
-        when(this.db.onHand(item)).thenReturn(currentLevel);
-        final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
-
-        // when
-        final List<Order> actual = im.getOrders(this.today);
-
-        // then
-        assertEquals(1, actual.size());
-        assertEquals(item, actual.get(0).item);
-        assertEquals(requiredLevel - currentLevel, actual.get(0).quantity);
-
-    }
-
-    @Test
-    public void overStocked() {
-        // given
-        final int requiredLevel = 15;
-        final int currentLevel = 25;
-        final Item item = new StockItem(requiredLevel);
-        when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
-        when(this.db.onHand(item)).thenReturn(currentLevel);
-        final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
-
-        // when
-        final List<Order> actual = im.getOrders(this.today);
-
-        // then
-        assertTrue(actual.isEmpty());
-
-    }
-
-    @Test
-    public void seasonalAndOnSaleSeasonalBigger() {
-        final int requiredLevel = 25;
-        final int currentLevel = 11;
-        final Season season = Season.Fall;
-        final Item item = new SeasonalItem(requiredLevel, season);
-        when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
-        when(this.db.onHand(item)).thenReturn(currentLevel);
-        when(this.minfo.season(this.today)).thenReturn(season);
-        when(this.minfo.onSale(item, this.today)).thenReturn(true);
-        final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
-
-        // when
-        final List<Order> actual = im.getOrders(this.today);
-
-        // then
-        assertEquals(1, actual.size());
-        assertEquals(item, actual.get(0).item);
-        assertEquals(requiredLevel * 2 - currentLevel, actual.get(0).quantity);
-
-    }
-
-    @Test
-    public void seasonalAndOnSaleSeasonalSmaller() {
-        final int requiredLevel = 15;
-        final int currentLevel = 11;
-        final Season season = Season.Fall;
-        final Item item = new SeasonalItem(requiredLevel, season);
-        when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
-        when(this.db.onHand(item)).thenReturn(currentLevel);
-        when(this.minfo.season(this.today)).thenReturn(season);
-        when(this.minfo.onSale(item, this.today)).thenReturn(true);
-        final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
-
-        // when
-        final List<Order> actual = im.getOrders(this.today);
-
-        // then
-        assertEquals(1, actual.size());
-        assertEquals(item, actual.get(0).item);
-        assertEquals(requiredLevel + 20 - currentLevel, actual.get(0).quantity);
-
-    }
-
-    @Test
-    public void seasonalInSeason() {
-        final int requiredLevel = 15;
-        final int currentLevel = 11;
-        final Season season = Season.Fall;
-        final Item item = new SeasonalItem(requiredLevel, season);
-        when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
-        when(this.db.onHand(item)).thenReturn(currentLevel);
-        when(this.minfo.season(this.today)).thenReturn(season);
-        final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
-
-        // when
-        final List<Order> actual = im.getOrders(this.today);
-
-        // then
-        assertEquals(1, actual.size());
-        assertEquals(item, actual.get(0).item);
-        assertEquals(requiredLevel * 2 - currentLevel, actual.get(0).quantity);
-
-    }
-
-    @Test
-    public void seasonalNotInSeason() {
-        final int requiredLevel = 15;
-        final int currentLevel = 11;
-        final Season season = Season.Fall;
-        final Item item = new SeasonalItem(requiredLevel, Season.Spring);
-        when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
-        when(this.db.onHand(item)).thenReturn(currentLevel);
-        when(this.minfo.season(this.today)).thenReturn(season);
-        final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
-
-        // when
-        final List<Order> actual = im.getOrders(this.today);
-
-        // then
-        assertEquals(1, actual.size());
-        assertEquals(item, actual.get(0).item);
-        assertEquals(requiredLevel - currentLevel, actual.get(0).quantity);
-
-    }
-
-    @Before
-    public void setup() {
-        this.db = mock(InventoryDatabase.class);
-        this.minfo = mock(MarketingInfo.class);
-        this.today = LocalDate.of(2222, 12, 17);
-    }
-
-    @Test
-    public void sufficientStock() {
-        // given
-        final int requiredLevel = 15;
-        final int currentLevel = 15;
-        final Item item = new StockItem(requiredLevel);
-        when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
-        when(this.db.onHand(item)).thenReturn(currentLevel);
-        final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
-
-        // when
-        final List<Order> actual = im.getOrders(this.today);
-
-        // then
-        assertTrue(actual.isEmpty());
-
-    }
-
+    
     @Test
     public void whenNoStockItemsDoNotOrder() {
         // given
         final LocalDate today = LocalDate.now();
-        final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
+        final InventoryManager im = new AceInventoryManager(db, minfo);
 
         // when
         final List<Order> actual = im.getOrders(today);
@@ -253,5 +50,209 @@ public class InventoryTest {
         assertTrue(actual.isEmpty());
 
     }
+    
+    @Test public void orderToLevel() {
+        // given
+        final int requiredLevel = 15;
+        final int currentLevel = 12;
+        Item item = new StockItem(requiredLevel);
+        when(db.stockItems())
+        .thenReturn(Collections.singletonList(item));
+        when(db.onHand(item)).thenReturn(currentLevel);
+        final InventoryManager im = new AceInventoryManager(db, minfo);
+        
+        // when
+        final List<Order> actual = im.getOrders(today);
+        
+        // then
+        assertEquals(1, actual.size());
+        assertEquals(item, actual.get(0).item);
+        assertEquals(requiredLevel - currentLevel, actual.get(0).quantity);
+        
+    }
 
+    @Test public void overStocked() {
+        // given
+        int requiredLevel = 15;
+        int currentLevel = 25;
+        Item item = new StockItem(requiredLevel);
+        when(db.stockItems())
+        .thenReturn(Collections.singletonList(item));
+        when(db.onHand(item)).thenReturn(currentLevel);
+        final InventoryManager im = new AceInventoryManager(db, minfo);
+
+        // when
+        final List<Order> actual = im.getOrders(today);
+        
+        // then
+        assertTrue(actual.isEmpty());
+        
+        
+    }
+    
+    @Test public void sufficientStock() {
+        // given
+        int requiredLevel = 15;
+        int currentLevel = 15;
+        Item item = new StockItem(requiredLevel);
+        when(db.stockItems())
+        .thenReturn(Collections.singletonList(item));
+        when(db.onHand(item)).thenReturn(currentLevel);
+        final InventoryManager im = new AceInventoryManager(db, minfo);
+
+        // when
+        final List<Order> actual = im.getOrders(today);
+        
+        // then
+        assertTrue(actual.isEmpty());
+                
+    }
+    
+    @Test public void onSale() {
+        int requiredLevel = 15;
+        int currentLevel = 11;
+        Item item = new StockItem(requiredLevel);
+        when(db.stockItems())
+        .thenReturn(Collections.singletonList(item));
+        when(db.onHand(item)).thenReturn(currentLevel);
+        when(minfo.onSale(item, today)).thenReturn(true);
+        final InventoryManager im = new AceInventoryManager(db, minfo);
+
+        // when
+        final List<Order> actual = im.getOrders(today);
+        
+        // then
+        assertEquals(1, actual.size());
+        assertEquals(item, actual.get(0).item);
+        assertEquals(requiredLevel + 20 - currentLevel, actual.get(0).quantity);
+        
+    }
+    
+    @Test public void seasonalInSeason() {
+        int requiredLevel = 15;
+        int currentLevel = 11;
+        final Season season = Season.Fall;
+        Item item = new SeasonalItem(requiredLevel, season);
+        when(db.stockItems())
+        .thenReturn(Collections.singletonList(item));
+        when(db.onHand(item)).thenReturn(currentLevel);
+        when(minfo.season(today)).thenReturn(season);
+        final InventoryManager im = new AceInventoryManager(db, minfo);
+
+        // when
+        final List<Order> actual = im.getOrders(today);
+        
+        // then
+        assertEquals(1, actual.size());
+        assertEquals(item, actual.get(0).item);
+        assertEquals(requiredLevel * 2 - currentLevel, actual.get(0).quantity);
+        
+    }
+    
+    @Test public void seasonalNotInSeason() {
+        int requiredLevel = 15;
+        int currentLevel = 11;
+        final Season season = Season.Fall;
+        Item item = new SeasonalItem(requiredLevel, Season.Spring);
+        when(db.stockItems())
+        .thenReturn(Collections.singletonList(item));
+        when(db.onHand(item)).thenReturn(currentLevel);
+        when(minfo.season(today)).thenReturn(season);
+        final InventoryManager im = new AceInventoryManager(db, minfo);
+
+        // when
+        final List<Order> actual = im.getOrders(today);
+        
+        // then
+        assertEquals(1, actual.size());
+        assertEquals(item, actual.get(0).item);
+        assertEquals(requiredLevel - currentLevel, actual.get(0).quantity);
+        
+    }
+    
+    @Test public void seasonalAndOnSaleSeasonalBigger() {
+        int requiredLevel = 25;
+        int currentLevel = 11;
+        final Season season = Season.Fall;
+        Item item = new SeasonalItem(requiredLevel, season);
+        when(db.stockItems())
+        .thenReturn(Collections.singletonList(item));
+        when(db.onHand(item)).thenReturn(currentLevel);
+        when(minfo.season(today)).thenReturn(season);
+        when(minfo.onSale(item, today)).thenReturn(true);
+        final InventoryManager im = new AceInventoryManager(db, minfo);
+
+        // when
+        final List<Order> actual = im.getOrders(today);
+        
+        // then
+        assertEquals(1, actual.size());
+        assertEquals(item, actual.get(0).item);
+        assertEquals(requiredLevel * 2 - currentLevel, actual.get(0).quantity);
+           
+    }
+    
+    @Test public void seasonalAndOnSaleSeasonalSmaller() {
+        int requiredLevel = 15;
+        int currentLevel = 11;
+        final Season season = Season.Fall;
+        Item item = new SeasonalItem(requiredLevel, season);
+        when(db.stockItems())
+        .thenReturn(Collections.singletonList(item));
+        when(db.onHand(item)).thenReturn(currentLevel);
+        when(minfo.season(today)).thenReturn(season);
+        when(minfo.onSale(item, today)).thenReturn(true);
+        final InventoryManager im = new AceInventoryManager(db, minfo);
+
+        // when
+        final List<Order> actual = im.getOrders(today);
+        
+        // then
+        assertEquals(1, actual.size());
+        assertEquals(item, actual.get(0).item);
+        assertEquals(requiredLevel + 20 - currentLevel, actual.get(0).quantity);
+           
+    }
+    
+    @Test public void orderIfFirstDayOfMonth() {
+        // given
+        final LocalDate today = LocalDate.of(2112, 9, 1);
+        int requiredLevel = 15;
+        int currentLevel = 9;
+        Item item = new StockItem(requiredLevel, true);
+        when(db.stockItems())
+        .thenReturn(Collections.singletonList(item));
+        when(db.onHand(item)).thenReturn(currentLevel);
+        final InventoryManager im = new AceInventoryManager(db, minfo);
+
+        // when
+        final List<Order> actual = im.getOrders(today);
+        
+        // then
+        assertEquals(1, actual.size());
+        assertEquals(item, actual.get(0).item);
+        assertEquals(requiredLevel - currentLevel, actual.get(0).quantity);
+                
+    }
+    
+    @Test public void noOrderIfNotFirstDayOfMonth() {
+        // given
+        final LocalDate today = LocalDate.of(2112, 9, 2);
+        int requiredLevel = 15;
+        int currentLevel = 9;
+        Item item = new StockItem(requiredLevel, true);
+        when(db.stockItems())
+        .thenReturn(Collections.singletonList(item));
+        when(db.onHand(item)).thenReturn(currentLevel);
+        final InventoryManager im = new AceInventoryManager(db, minfo);
+
+        // when
+        final List<Order> actual = im.getOrders(today);
+        
+        // then
+        assertTrue(actual.isEmpty());
+                
+    }
+    
+    
 }
