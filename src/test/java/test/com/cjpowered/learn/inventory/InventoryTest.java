@@ -20,6 +20,7 @@ import com.cjpowered.learn.inventory.ace.AceInventoryManager;
  * for the requirements.
  *
  */
+import com.cjpowered.learn.marketing.MarketingInfo;
 
 public class InventoryTest {
 
@@ -28,7 +29,8 @@ public class InventoryTest {
         // given
         final LocalDate today = LocalDate.now();
         final InventoryDatabase db = mock(InventoryDatabase.class);
-        final InventoryManager im = new AceInventoryManager(db);
+        MarketingInfo minfo = mock(MarketingInfo.class);
+        final InventoryManager im = new AceInventoryManager(db, minfo);
 
         // when
         final List<Order> actual = im.getOrders(today);
@@ -48,7 +50,8 @@ public class InventoryTest {
         when(db.stockItems())
         .thenReturn(Collections.singletonList(item));
         when(db.onHand(item)).thenReturn(currentLevel);
-        final InventoryManager im = new AceInventoryManager(db);
+        MarketingInfo minfo = mock(MarketingInfo.class);
+        final InventoryManager im = new AceInventoryManager(db, minfo);
         
         // when
         final List<Order> actual = im.getOrders(today);
@@ -70,7 +73,8 @@ public class InventoryTest {
         when(db.stockItems())
         .thenReturn(Collections.singletonList(item));
         when(db.onHand(item)).thenReturn(currentLevel);
-        final InventoryManager im = new AceInventoryManager(db);
+        MarketingInfo minfo = mock(MarketingInfo.class);
+        final InventoryManager im = new AceInventoryManager(db, minfo);
 
         // when
         final List<Order> actual = im.getOrders(today);
@@ -91,14 +95,38 @@ public class InventoryTest {
         when(db.stockItems())
         .thenReturn(Collections.singletonList(item));
         when(db.onHand(item)).thenReturn(currentLevel);
-        final InventoryManager im = new AceInventoryManager(db);
+        MarketingInfo minfo = mock(MarketingInfo.class);
+        final InventoryManager im = new AceInventoryManager(db, minfo);
 
         // when
         final List<Order> actual = im.getOrders(today);
         
         // then
         assertTrue(actual.isEmpty());
+                
+    }
+    
+    @Test public void onSale() {
+        final LocalDate today = LocalDate.now();
+        int requiredLevel = 15;
+        int currentLevel = 11;
+        InventoryDatabase db = mock(InventoryDatabase.class);
+        Item item = new StockItem(requiredLevel);
+        when(db.stockItems())
+        .thenReturn(Collections.singletonList(item));
+        MarketingInfo minfo = mock(MarketingInfo.class);
+        when(minfo.onSale(item, today)).thenReturn(true);
+        when(db.onHand(item)).thenReturn(currentLevel);
+        final InventoryManager im = new AceInventoryManager(db, minfo);
+
+        // when
+        final List<Order> actual = im.getOrders(today);
         
+        // then
+        assertEquals(1, actual.size());
+        assertEquals(item, actual.get(0).item);
+        assertEquals(requiredLevel + 20 - currentLevel, actual.get(0).quantity);
         
     }
+    
 }
