@@ -352,4 +352,26 @@ public class InventoryTest {
 
     }
 
+    @Test
+    public void managerDoesNotReturnZeroQuantityOrder() {
+
+        // given
+        final int item1Quantity = 12;
+        final Item item1 = mock(Item.class);
+        when(item1.computeOrderQuantity(db, minfo, today)).thenReturn(item1Quantity);
+        final Item item2 = mock(Item.class);
+        when(item2.computeOrderQuantity(db, minfo, today)).thenReturn(0);
+        when(db.stockItems()).thenReturn(Arrays.asList(item1, item2));
+        final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
+
+        // when
+        final List<Order> actual = im.getOrders(today);
+
+        // then
+        Set<Order> expected = Collections.singleton(new Order(item1, item1Quantity)); 
+        assertEquals(expected, new HashSet<>(actual));
+        
+
+    }
+
 }
