@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -196,7 +197,7 @@ public class StockItemTest {
 
     }
 
-    @Test public void ordersOnSchedule() {
+    @Test public void doesNotOrderOffSchedule() {
         
         // given
         Schedule schedule = mock(Schedule.class);
@@ -210,6 +211,26 @@ public class StockItemTest {
 
         // then
         assertEquals(0, actual);
+        
+    }
+    
+    @Test public void ordersOnSchedule() {
+        
+        // given
+        final int requiredStock = 1000;
+        final int currentStock = 100;
+        
+        Schedule schedule = mock(Schedule.class);
+        when(schedule.canOrder(any())).thenReturn(true);
+        final StockCalculator calc = mock(StockCalculator.class);
+        when(calc.requiredStock(any(), anyInt(), any(), any())).thenReturn(requiredStock);
+        final Item item = new StockItem(2 /*ignored*/ ,1,Collections.singletonList(calc), schedule);
+        when(db.onHand(item)).thenReturn(currentStock);
+        // when
+        final int actual = item.computeOrderQuantity(this.db, this.minfo, this.today);
+
+        // then
+        assertEquals(requiredStock - currentStock, actual);
         
     }
     
