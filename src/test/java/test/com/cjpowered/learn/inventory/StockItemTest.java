@@ -60,7 +60,7 @@ public class StockItemTest {
         final int deficiency = 3;
 
         final StockCalculator calc1 = mock(StockCalculator.class);
-        when(calc1.requiredStock(any(), anyInt(), any(), any())).thenReturn(currentLevel + deficiency);
+        when(calc1.requiredStock(anyInt(), any())).thenReturn(currentLevel + deficiency);
         final Item item = new StockItem(20, 1, Arrays.asList(calc1), new AnyDay());
         when(this.db.onHand(item)).thenReturn(currentLevel);
 
@@ -80,9 +80,9 @@ public class StockItemTest {
 
         final StockCalculator calc1 = mock(StockCalculator.class);
         final int calc1Return = 1000;
-        when(calc1.requiredStock(any(), anyInt(), any(), any())).thenReturn(calc1Return);
+        when(calc1.requiredStock(anyInt(), any())).thenReturn(calc1Return);
         final StockCalculator calc2 = mock(StockCalculator.class);
-        when(calc2.requiredStock(any(), anyInt(), any(), any())).thenReturn(calc1Return / 2);
+        when(calc2.requiredStock(anyInt(), any())).thenReturn(calc1Return / 2);
         final Item item = new StockItem(20, 1, Arrays.asList(calc1, calc2), new AnyDay());
         when(this.db.onHand(item)).thenReturn(currentLevel);
 
@@ -122,7 +122,7 @@ public class StockItemTest {
         final int requiredLevel = currentLevel + bulkPackageSize * 13 + 1;
 
         final StockCalculator calc = mock(StockCalculator.class);
-        when(calc.requiredStock(any(), anyInt(), any(), any())).thenReturn(requiredLevel);
+        when(calc.requiredStock(anyInt(), any())).thenReturn(requiredLevel);
         final Item item = new StockItem(2 /* ignored */, bulkPackageSize, Arrays.asList(calc), new AnyDay());
         when(this.db.onHand(item)).thenReturn(currentLevel);
 
@@ -165,7 +165,7 @@ public class StockItemTest {
         final int requiredLevel = currentLevel + bulkPackageSize;
 
         final StockCalculator calc = mock(StockCalculator.class);
-        when(calc.requiredStock(any(), anyInt(), any(), any())).thenReturn(requiredLevel);
+        when(calc.requiredStock(anyInt(), any())).thenReturn(requiredLevel);
         final Item item = new StockItem(2 /* ignored */, bulkPackageSize, Arrays.asList(calc), new AnyDay());
         when(this.db.onHand(item)).thenReturn(currentLevel);
 
@@ -186,7 +186,7 @@ public class StockItemTest {
         final int requiredLevel = currentLevel + 7 * bulkPackageSize;
 
         final StockCalculator calc = mock(StockCalculator.class);
-        when(calc.requiredStock(any(), anyInt(), any(), any())).thenReturn(requiredLevel);
+        when(calc.requiredStock(anyInt(), any())).thenReturn(requiredLevel);
         final Item item = new StockItem(2 /* ignored */, bulkPackageSize, Arrays.asList(calc), new AnyDay());
         when(this.db.onHand(item)).thenReturn(currentLevel);
 
@@ -226,7 +226,7 @@ public class StockItemTest {
         final Schedule schedule = mock(Schedule.class);
         when(schedule.canOrder(any())).thenReturn(true);
         final StockCalculator calc = mock(StockCalculator.class);
-        when(calc.requiredStock(any(), anyInt(), any(), any())).thenReturn(requiredStock);
+        when(calc.requiredStock(anyInt(), any())).thenReturn(requiredStock);
         final Item item = new StockItem(2 /* ignored */ , 1, Collections.singletonList(calc), schedule);
         when(this.db.onHand(item)).thenReturn(currentStock);
         // when
