@@ -54,7 +54,7 @@ public class SeasonalStockCalculatorTest {
         // when
         final int actual = calc.requiredStock(item, normalLevel, db, minfo, today);
 
-        assertEquals(normalLevel, actual);
+        assertEquals(0, actual);
 
     }
 

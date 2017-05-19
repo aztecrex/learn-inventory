@@ -19,6 +19,7 @@ import com.cjpowered.learn.inventory.Item;
 import com.cjpowered.learn.inventory.Order;
 import com.cjpowered.learn.inventory.SaleStockCalculator;
 import com.cjpowered.learn.inventory.SeasonalStockCalculator;
+import com.cjpowered.learn.inventory.StandardStockCalculator;
 import com.cjpowered.learn.inventory.StockItem;
 import com.cjpowered.learn.inventory.ace.AceInventoryManager;
 /*
@@ -61,7 +62,7 @@ public class InventoryTest {
         // given
         final int requiredLevel = 15;
         final int currentLevel = 12;
-        final Item item = new StockItem(requiredLevel, Arrays.asList(new SaleStockCalculator()));
+        final Item item = new StockItem(requiredLevel, Arrays.asList(new StandardStockCalculator()));
         when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
         when(this.db.onHand(item)).thenReturn(currentLevel);
         final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
@@ -155,28 +156,6 @@ public class InventoryTest {
 
     }
 
-    @Test
-    public void seasonalNotInSeason() {
-        final int requiredLevel = 15;
-        final int currentLevel = 11;
-        final Season season = Season.Fall;
-        final Item item = new StockItem(requiredLevel,
-                Arrays.asList(new SaleStockCalculator(), new SeasonalStockCalculator(Season.Spring)),
-                false);
-        when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
-        when(this.db.onHand(item)).thenReturn(currentLevel);
-        when(this.minfo.season(this.today)).thenReturn(season);
-        final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
-
-        // when
-        final List<Order> actual = im.getOrders(this.today);
-
-        // then
-        assertEquals(1, actual.size());
-        assertEquals(item, actual.get(0).item);
-        assertEquals(requiredLevel - currentLevel, actual.get(0).quantity);
-
-    }
 
     @Test
     public void seasonalAndOnSaleSeasonalBigger() {
@@ -232,7 +211,7 @@ public class InventoryTest {
         final LocalDate today = LocalDate.of(2112, 9, 1);
         final int requiredLevel = 15;
         final int currentLevel = 9;
-        final Item item = new StockItem(requiredLevel, Arrays.asList(new SaleStockCalculator()), true);
+        final Item item = new StockItem(requiredLevel, Arrays.asList(new StandardStockCalculator()), true);
         when(this.db.stockItems()).thenReturn(Collections.singletonList(item));
         when(this.db.onHand(item)).thenReturn(currentLevel);
         final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
