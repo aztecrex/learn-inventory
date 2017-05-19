@@ -126,9 +126,7 @@ public class StockItemTest {
         final int actual = item.computeOrderQuantity(this.db, this.minfo, this.today);
 
         // then
-        @SuppressWarnings("unused")
-        final int expected = bulkPackageSize * ((requiredLevel - currentLevel) / bulkPackageSize
-                + ((((requiredLevel - currentLevel) % bulkPackageSize) == 0) ? 0 : 1));
+        final int expected = bulkPackageSize * (((requiredLevel - currentLevel) / bulkPackageSize) + 1);
         assertEquals(expected, actual);
 
     }
