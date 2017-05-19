@@ -29,10 +29,12 @@ public class InventoryTest {
 
     InventoryDatabase db;
     MarketingInfo minfo;
+    LocalDate today;
     
     @Before public void setup() {
         db = mock(InventoryDatabase.class);
         minfo = mock(MarketingInfo.class);
+        today = LocalDate.of(2222, 12, 17);
     }
     
     @Test
@@ -51,7 +53,6 @@ public class InventoryTest {
     
     @Test public void orderToLevel() {
         // given
-        final LocalDate today = LocalDate.now();
         final int requiredLevel = 15;
         final int currentLevel = 12;
         Item item = new StockItem(requiredLevel);
@@ -72,7 +73,6 @@ public class InventoryTest {
 
     @Test public void overStocked() {
         // given
-        final LocalDate today = LocalDate.now();
         int requiredLevel = 15;
         int currentLevel = 25;
         Item item = new StockItem(requiredLevel);
@@ -92,7 +92,6 @@ public class InventoryTest {
     
     @Test public void sufficientStock() {
         // given
-        final LocalDate today = LocalDate.now();
         int requiredLevel = 15;
         int currentLevel = 15;
         Item item = new StockItem(requiredLevel);
@@ -110,7 +109,6 @@ public class InventoryTest {
     }
     
     @Test public void onSale() {
-        final LocalDate today = LocalDate.now();
         int requiredLevel = 15;
         int currentLevel = 11;
         Item item = new StockItem(requiredLevel);
@@ -131,7 +129,6 @@ public class InventoryTest {
     }
     
     @Test public void seasonalInSeason() {
-        final LocalDate today = LocalDate.now();
         int requiredLevel = 15;
         int currentLevel = 11;
         final Season season = Season.Fall;
@@ -153,7 +150,6 @@ public class InventoryTest {
     }
     
     @Test public void seasonalNotInSeason() {
-        final LocalDate today = LocalDate.now();
         int requiredLevel = 15;
         int currentLevel = 11;
         final Season season = Season.Fall;
@@ -175,7 +171,6 @@ public class InventoryTest {
     }
     
     @Test public void seasonalAndOnSaleSeasonalBigger() {
-        final LocalDate today = LocalDate.now();
         int requiredLevel = 25;
         int currentLevel = 11;
         final Season season = Season.Fall;
@@ -198,7 +193,6 @@ public class InventoryTest {
     }
     
     @Test public void seasonalAndOnSaleSeasonalSmaller() {
-        final LocalDate today = LocalDate.now();
         int requiredLevel = 15;
         int currentLevel = 11;
         final Season season = Season.Fall;
