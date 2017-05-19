@@ -197,6 +197,29 @@ public class InventoryTest {
            
     }
     
+    @Test public void seasonalAndOnSaleSeasonalSmaller() {
+        final LocalDate today = LocalDate.now();
+        int requiredLevel = 15;
+        int currentLevel = 11;
+        final Season season = Season.Fall;
+        Item item = new SeasonalItem(requiredLevel, season);
+        when(db.stockItems())
+        .thenReturn(Collections.singletonList(item));
+        when(db.onHand(item)).thenReturn(currentLevel);
+        when(minfo.season(today)).thenReturn(season);
+        when(minfo.onSale(item, today)).thenReturn(true);
+        final InventoryManager im = new AceInventoryManager(db, minfo);
+
+        // when
+        final List<Order> actual = im.getOrders(today);
+        
+        // then
+        assertEquals(1, actual.size());
+        assertEquals(item, actual.get(0).item);
+        assertEquals(requiredLevel + 20 - currentLevel, actual.get(0).quantity);
+           
+    }
+    
     
     
     
