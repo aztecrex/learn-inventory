@@ -14,6 +14,7 @@ import com.cjpowered.learn.inventory.InventoryDatabase;
 import com.cjpowered.learn.inventory.InventoryManager;
 import com.cjpowered.learn.inventory.Item;
 import com.cjpowered.learn.inventory.Order;
+import com.cjpowered.learn.inventory.SeasonalItem;
 import com.cjpowered.learn.inventory.StockItem;
 import com.cjpowered.learn.inventory.ace.AceInventoryManager;
 /*
@@ -22,6 +23,7 @@ import com.cjpowered.learn.inventory.ace.AceInventoryManager;
  *
  */
 import com.cjpowered.learn.marketing.MarketingInfo;
+import com.cjpowered.learn.marketing.Season;
 
 public class InventoryTest {
 
@@ -127,5 +129,29 @@ public class InventoryTest {
         assertEquals(requiredLevel + 20 - currentLevel, actual.get(0).quantity);
         
     }
+    
+    @Test public void seasonalInSeason() {
+        final LocalDate today = LocalDate.now();
+        int requiredLevel = 15;
+        int currentLevel = 11;
+        final Season season = Season.Fall;
+        Item item = new SeasonalItem(requiredLevel, season);
+        when(db.stockItems())
+        .thenReturn(Collections.singletonList(item));
+        when(db.onHand(item)).thenReturn(currentLevel);
+        when(minfo.season(today)).thenReturn(season);
+        final InventoryManager im = new AceInventoryManager(db, minfo);
+
+        // when
+        final List<Order> actual = im.getOrders(today);
+        
+        // then
+        assertEquals(1, actual.size());
+        assertEquals(item, actual.get(0).item);
+        assertEquals(requiredLevel * 2 - currentLevel, actual.get(0).quantity);
+        
+    }
+    
+    
     
 }
