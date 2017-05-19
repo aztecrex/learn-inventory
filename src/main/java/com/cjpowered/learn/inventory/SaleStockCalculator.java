@@ -13,7 +13,7 @@ public class SaleStockCalculator implements StockCalculator {
     }
 
     @Override
-    public int requiredStock(StockSpecification spec) {
+    public int requiredStock(MarketingSpec spec) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("NYI");
     }

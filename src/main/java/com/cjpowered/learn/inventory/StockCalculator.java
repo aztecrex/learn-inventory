@@ -29,6 +29,6 @@ public interface StockCalculator {
     @Deprecated
     int requiredStock(Item item, int normalLevel, MarketingInfo marketingInfo, LocalDate when);
 
-    int requiredStock(StockSpecification spec);
+    int requiredStock(MarketingSpec spec);
     
 }

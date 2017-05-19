@@ -10,8 +10,9 @@ import org.junit.Test;
 import com.cjpowered.learn.inventory.Item;
 import com.cjpowered.learn.inventory.StandardStockCalculator;
 import com.cjpowered.learn.inventory.StockCalculator;
-import com.cjpowered.learn.inventory.StockSpecification;
+import com.cjpowered.learn.inventory.MarketingSpec;
 import com.cjpowered.learn.marketing.MarketingInfo;
+import com.cjpowered.learn.marketing.Season;
 
 public class StandardStockCalculatorTest {
 
@@ -38,7 +39,7 @@ public class StandardStockCalculatorTest {
 
         // given
         final int normalLevel = 175;
-        final StockSpecification spec = new StockSpecification(normalLevel);
+        final MarketingSpec spec = new MarketingSpec(normalLevel, Season.Summer);
         final StockCalculator calc = new StandardStockCalculator();
 
         // when
