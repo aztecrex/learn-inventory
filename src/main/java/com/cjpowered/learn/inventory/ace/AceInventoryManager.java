@@ -14,9 +14,8 @@ public final class AceInventoryManager implements InventoryManager {
 
     private final InventoryDatabase database;
     private final MarketingInfo marketingInfo;
-    
-    
-    public AceInventoryManager(InventoryDatabase database, MarketingInfo marketingInfo) {
+
+    public AceInventoryManager(final InventoryDatabase database, final MarketingInfo marketingInfo) {
         this.database = database;
         this.marketingInfo = marketingInfo;
     }
@@ -24,11 +23,11 @@ public final class AceInventoryManager implements InventoryManager {
     @Override
     public List<Order> getOrders(final LocalDate when) {
 
-        final List<Item> items = database.stockItems();
+        final List<Item> items = this.database.stockItems();
         final List<Order> orders = new ArrayList<>();
 
-        for (Item item : items) {
-            final int orderQuantity = item.computeOrderQuantity(database, marketingInfo, when);
+        for (final Item item : items) {
+            final int orderQuantity = item.computeOrderQuantity(this.database, this.marketingInfo, when);
             if (orderQuantity > 0) {
                 final Order order = new Order(item, orderQuantity);
                 orders.add(order);

@@ -24,18 +24,17 @@ public final class Order {
 
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj) {
+        if (this == obj)
             return true;
-        } else if (obj instanceof Order) {
-            return item.equals(((Order) obj).item) && quantity == ((Order) obj).quantity;
-        }
+        else if (obj instanceof Order)
+            return this.item.equals(((Order) obj).item) && this.quantity == ((Order) obj).quantity;
         return false;
 
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(item, quantity);
+        return Objects.hash(this.item, this.quantity);
     }
 
 }
