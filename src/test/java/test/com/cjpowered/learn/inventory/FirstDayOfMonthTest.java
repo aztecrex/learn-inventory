@@ -20,4 +20,13 @@ public class FirstDayOfMonthTest {
         
     }
     
+    @Test public void returnsFalseOnNotFirstDayOfMonth() {
+        
+        final LocalDate today = LocalDate.of(2003, 3, 2);
+        final Schedule s = new FirstDayOfMonth();
+        
+        assertFalse(s.canOrder(today));
+        
+    }
+    
 }
