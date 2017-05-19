@@ -45,7 +45,7 @@ public class InventoryTest {
     }
 
     @Test
-    public void whenNoStockItemsDoNotOrder() {
+    public void managerHandlesZeroItems() {
         // given
         final LocalDate today = LocalDate.now();
         final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
