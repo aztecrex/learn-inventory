@@ -12,6 +12,8 @@ import org.junit.Test;
 
 import com.cjpowered.learn.inventory.InventoryDatabase;
 import com.cjpowered.learn.inventory.Item;
+import com.cjpowered.learn.inventory.Schedule;
+import com.cjpowered.learn.inventory.StandardStockCalculator;
 import com.cjpowered.learn.inventory.StockCalculator;
 import com.cjpowered.learn.inventory.StockItem;
 import com.cjpowered.learn.marketing.MarketingInfo;
@@ -194,4 +196,21 @@ public class StockItemTest {
 
     }
 
+    @Test public void ordersOnSchedule() {
+        
+        // given
+        Schedule schedule = mock(Schedule.class);
+        when(schedule.canOrder(any())).thenReturn(false);
+        final StockCalculator calc = mock(StockCalculator.class);
+        when(calc.requiredStock(any(), anyInt(), any(), any())).thenReturn(1000);
+        final Item item = new StockItem(2 /*ignored*/ ,1,Arrays.asList(new StandardStockCalculator()), schedule);
+        
+        // when
+        final int actual = item.computeOrderQuantity(this.db, this.minfo, this.today);
+
+        // then
+        assertEquals(0, actual);
+        
+    }
+    
 }

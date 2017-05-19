@@ -17,6 +17,8 @@ public class StockItem implements Item {
 
     final int packageSize;
 
+    final Schedule schedule;
+
     public StockItem(final int normalLevel, final Collection<StockCalculator> requiredStockCalculators) {
         this(normalLevel, requiredStockCalculators, false);
     }
@@ -27,6 +29,7 @@ public class StockItem implements Item {
         this.requiredStockCalculators = new HashSet<>(requiredStockCalculators);
         this.firstDayOfMonthOnly = firstDayOfMonthOnly;
         this.packageSize = packageSize;
+        this.schedule = null;
     }
 
     public StockItem(final int normalLevel, final Collection<StockCalculator> requiredStockCalculators,
@@ -34,9 +37,22 @@ public class StockItem implements Item {
         this(normalLevel, requiredStockCalculators, firstDayOfMonthOnly, 1);
     }
 
+    public StockItem(final int normalLevel, int packageSize, final Collection<StockCalculator> stockCalculators,
+            Schedule schedule) {
+        this.normalLevel = normalLevel;
+        this.packageSize = packageSize;
+        this.requiredStockCalculators = new HashSet<>(stockCalculators);
+        this.schedule = schedule;
+        this.firstDayOfMonthOnly = false;
+    }
+
     @Override
     public int computeOrderQuantity(final InventoryDatabase database, final MarketingInfo marketingInfo,
             final LocalDate when) {
+
+        if (this.schedule != null && !this.schedule.canOrder(when))
+            return 0;
+
         if (this.firstDayOfMonthOnly && when.getDayOfMonth() != 1)
             return 0;
 
