@@ -109,4 +109,28 @@ public class ItemTest {
 
     }
 
+    @Test
+    public void orderInBulk() {
+
+        // given
+        final int currentLevel = 7;
+        final int requiredLevel = 20;
+        final int bulkPackageSize = 5;
+
+        final StockCalculator calc = mock(StockCalculator.class);
+        when(calc.requiredStock(any(), anyInt(), any(), any())).thenReturn(requiredLevel);
+        final Item item = new StockItem(2 /* ignored */, Arrays.asList(calc), false, bulkPackageSize);
+        when(this.db.onHand(item)).thenReturn(currentLevel);
+
+        // when
+        final int actual = item.computeOrderQuantity(this.db, this.minfo, this.today);
+
+        // then
+        @SuppressWarnings("unused")
+        final int expected = bulkPackageSize * ((requiredLevel - currentLevel) / bulkPackageSize
+                + ((((requiredLevel - currentLevel) % bulkPackageSize) == 0) ? 0 : 1));
+        assertEquals(expected, actual);
+
+    }
+
 }

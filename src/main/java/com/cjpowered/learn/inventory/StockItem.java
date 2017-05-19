@@ -14,16 +14,24 @@ public class StockItem implements Item {
     final boolean firstDayOfMonthOnly;
 
     final Set<StockCalculator> requiredStockCalculators;
-
+    
+    final int packageSize;
+    
     public StockItem(final int normalLevel, final Collection<StockCalculator> requiredStockCalculators) {
         this(normalLevel, requiredStockCalculators, false);
     }
 
     public StockItem(final int normalLevel, final Collection<StockCalculator> requiredStockCalculators,
-            final boolean firstDayOfMonthOnly) {
+            final boolean firstDayOfMonthOnly, int packageSize) {
         this.normalLevel = normalLevel;
         this.requiredStockCalculators = new HashSet<>(requiredStockCalculators);
         this.firstDayOfMonthOnly = firstDayOfMonthOnly;
+        this.packageSize = packageSize;
+    }
+
+    public StockItem(final int normalLevel, final Collection<StockCalculator> requiredStockCalculators,
+            final boolean firstDayOfMonthOnly) {
+        this(normalLevel, requiredStockCalculators, firstDayOfMonthOnly, 1);
     }
 
     @Override
@@ -38,6 +46,10 @@ public class StockItem implements Item {
         }
 
         final int onHand = database.onHand(this);
-        return Math.max(0, requiredLevel - onHand);
+        final int needed =  Math.max(0, requiredLevel - onHand);
+        
+        final int packages = (needed / packageSize + ((needed % packageSize) == 0 ? 0 : 1));
+        return packages * packageSize;
+        
     }
 }
