@@ -16,8 +16,8 @@ import org.junit.Test;
 import com.cjpowered.learn.inventory.InventoryDatabase;
 import com.cjpowered.learn.inventory.InventoryManager;
 import com.cjpowered.learn.inventory.Item;
-import com.cjpowered.learn.inventory.SaleStockCalculator;
 import com.cjpowered.learn.inventory.Order;
+import com.cjpowered.learn.inventory.SaleStockCalculator;
 import com.cjpowered.learn.inventory.SeasonalStockCalculator;
 import com.cjpowered.learn.inventory.StockItem;
 import com.cjpowered.learn.inventory.ace.AceInventoryManager;
@@ -272,21 +272,20 @@ public class InventoryTest {
         // given
         final int item1Quantity = 12;
         final Item item1 = mock(Item.class);
-        when(item1.computeOrderQuantity(db, minfo, today)).thenReturn(item1Quantity);
+        when(item1.computeOrderQuantity(this.db, this.minfo, this.today)).thenReturn(item1Quantity);
         final int item2Quantity = 17;
         final Item item2 = mock(Item.class);
-        when(item2.computeOrderQuantity(db, minfo, today)).thenReturn(item2Quantity);
-        when(db.stockItems()).thenReturn(Arrays.asList(item1, item2));
+        when(item2.computeOrderQuantity(this.db, this.minfo, this.today)).thenReturn(item2Quantity);
+        when(this.db.stockItems()).thenReturn(Arrays.asList(item1, item2));
         final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
 
         // when
-        final List<Order> actual = im.getOrders(today);
+        final List<Order> actual = im.getOrders(this.today);
 
         // then
-        Set<Order> expected = new HashSet<>(
+        final Set<Order> expected = new HashSet<>(
                 Arrays.asList(new Order(item1, item1Quantity), new Order(item2, item2Quantity)));
         assertEquals(expected, new HashSet<>(actual));
-        
 
     }
 
@@ -296,19 +295,18 @@ public class InventoryTest {
         // given
         final int item1Quantity = 12;
         final Item item1 = mock(Item.class);
-        when(item1.computeOrderQuantity(db, minfo, today)).thenReturn(item1Quantity);
+        when(item1.computeOrderQuantity(this.db, this.minfo, this.today)).thenReturn(item1Quantity);
         final Item item2 = mock(Item.class);
-        when(item2.computeOrderQuantity(db, minfo, today)).thenReturn(0);
-        when(db.stockItems()).thenReturn(Arrays.asList(item1, item2));
+        when(item2.computeOrderQuantity(this.db, this.minfo, this.today)).thenReturn(0);
+        when(this.db.stockItems()).thenReturn(Arrays.asList(item1, item2));
         final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
 
         // when
-        final List<Order> actual = im.getOrders(today);
+        final List<Order> actual = im.getOrders(this.today);
 
         // then
-        Set<Order> expected = Collections.singleton(new Order(item1, item1Quantity)); 
+        final Set<Order> expected = Collections.singleton(new Order(item1, item1Quantity));
         assertEquals(expected, new HashSet<>(actual));
-        
 
     }
 

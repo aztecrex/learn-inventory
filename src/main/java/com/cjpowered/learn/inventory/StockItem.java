@@ -31,7 +31,7 @@ public class StockItem implements Item {
     }
 
     public StockItem(final int normalLevel, final Collection<StockCalculator> requiredStockCalculators,
-            boolean firstDayOfMonthOnly) {
+            final boolean firstDayOfMonthOnly) {
         this.normalLevel = normalLevel;
         this.requiredStockCalculators = new HashSet<>(requiredStockCalculators);
         this.firstDayOfMonthOnly = firstDayOfMonthOnly;
@@ -42,10 +42,11 @@ public class StockItem implements Item {
             final LocalDate when) {
         if (this.firstDayOfMonthOnly && when.getDayOfMonth() != 1)
             return 0;
-        
+
         int requiredLevel = 0;
-        for(StockCalculator calc : requiredStockCalculators) {
-            requiredLevel = Math.max(requiredLevel, calc.requiredStock(this, this.normalLevel, database, marketingInfo, when));
+        for (final StockCalculator calc : this.requiredStockCalculators) {
+            requiredLevel = Math.max(requiredLevel,
+                    calc.requiredStock(this, this.normalLevel, database, marketingInfo, when));
         }
 
         final int onHand = database.onHand(this);

@@ -9,8 +9,8 @@ import org.junit.Test;
 
 import com.cjpowered.learn.inventory.InventoryDatabase;
 import com.cjpowered.learn.inventory.Item;
-import com.cjpowered.learn.inventory.StockCalculator;
 import com.cjpowered.learn.inventory.StandardStockCalculator;
+import com.cjpowered.learn.inventory.StockCalculator;
 import com.cjpowered.learn.marketing.MarketingInfo;
 
 public class StandardStockCalculatorTest {
@@ -19,9 +19,9 @@ public class StandardStockCalculatorTest {
     public void returnsNormalLevel() {
 
         // given
-        InventoryDatabase db = mock(InventoryDatabase.class);
-        MarketingInfo minfo = mock(MarketingInfo.class);
-        LocalDate today = LocalDate.ofEpochDay(900039);
+        final InventoryDatabase db = mock(InventoryDatabase.class);
+        final MarketingInfo minfo = mock(MarketingInfo.class);
+        final LocalDate today = LocalDate.ofEpochDay(900039);
         final Item item = mock(Item.class);
 
         final int normalLevel = 175;
@@ -31,7 +31,7 @@ public class StandardStockCalculatorTest {
         final int actual = calc.requiredStock(item, normalLevel, db, minfo, today);
 
         assertEquals(normalLevel, actual);
-        
+
     }
 
 }

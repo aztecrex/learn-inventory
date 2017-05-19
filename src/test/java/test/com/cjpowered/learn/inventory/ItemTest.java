@@ -31,64 +31,62 @@ public class ItemTest {
 
     @Test
     public void itemOverstocked() {
-    
+
         // given
         final int currentLevel = 7;
-    
+
         final StockCalculator calc1 = mock(StockCalculator.class);
         when(calc1.requiredStock(any(), anyInt(), any(), any(), any())).thenReturn(currentLevel - 1);
         final Item item = new StockItem(20, Arrays.asList(calc1), false);
-        when(db.onHand(item)).thenReturn(currentLevel);
-    
+        when(this.db.onHand(item)).thenReturn(currentLevel);
+
         // when
-        int actual = item.computeOrderQuantity(db, minfo, today);
-    
+        final int actual = item.computeOrderQuantity(this.db, this.minfo, this.today);
+
         // then
         assertEquals(0, actual);
-    
+
     }
 
     @Test
     public void itemPicksLargestStockCalculation() {
-    
+
         // given
         final int currentLevel = 7;
-    
+
         final StockCalculator calc1 = mock(StockCalculator.class);
-        int calc1Return = 1000;
+        final int calc1Return = 1000;
         when(calc1.requiredStock(any(), anyInt(), any(), any(), any())).thenReturn(calc1Return);
         final StockCalculator calc2 = mock(StockCalculator.class);
         when(calc2.requiredStock(any(), anyInt(), any(), any(), any())).thenReturn(calc1Return / 2);
         final Item item = new StockItem(20, Arrays.asList(calc1, calc2), false);
-        when(db.onHand(item)).thenReturn(currentLevel);
-    
+        when(this.db.onHand(item)).thenReturn(currentLevel);
+
         // when
-        int actual = item.computeOrderQuantity(db, minfo, today);
-    
+        final int actual = item.computeOrderQuantity(this.db, this.minfo, this.today);
+
         // then
         assertEquals(calc1Return - currentLevel, actual);
-    
+
     }
 
     @Test
     public void itemSufficientStock() {
-    
+
         // given
         final int currentLevel = 7;
-    
+
         final StockCalculator calc1 = mock(StockCalculator.class);
         when(calc1.requiredStock(any(), anyInt(), any(), any(), any())).thenReturn(currentLevel);
         final Item item = new StockItem(20, Arrays.asList(calc1), false);
-        when(db.onHand(item)).thenReturn(currentLevel);
-    
+        when(this.db.onHand(item)).thenReturn(currentLevel);
+
         // when
-        int actual = item.computeOrderQuantity(db, minfo, today);
-    
+        final int actual = item.computeOrderQuantity(this.db, this.minfo, this.today);
+
         // then
         assertEquals(0, actual);
-    
+
     }
 
-
-    
 }
