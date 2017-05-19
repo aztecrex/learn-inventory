@@ -14,8 +14,7 @@ public class SaleStockCalculator implements StockCalculator {
 
     @Override
     public int requiredStock(int normalLevel, MarketingSpec spec) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("NYI");
+        return normalLevel + 20;
     }
 
 }

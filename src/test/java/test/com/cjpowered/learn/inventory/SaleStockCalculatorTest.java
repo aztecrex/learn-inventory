@@ -8,14 +8,16 @@ import java.time.LocalDate;
 import org.junit.Test;
 
 import com.cjpowered.learn.inventory.Item;
+import com.cjpowered.learn.inventory.MarketingSpec;
 import com.cjpowered.learn.inventory.SaleStockCalculator;
 import com.cjpowered.learn.inventory.StockCalculator;
 import com.cjpowered.learn.marketing.MarketingInfo;
+import com.cjpowered.learn.marketing.Season;
 
 public class SaleStockCalculatorTest {
 
     @Test
-    public void increasesRequiredDuringSale() {
+    public void increasesRequiredDuringSaleDeprecated() {
 
         // given
         final MarketingInfo minfo = mock(MarketingInfo.class);
@@ -34,7 +36,7 @@ public class SaleStockCalculatorTest {
     }
 
     @Test
-    public void noIncreaseNormally() {
+    public void noIncreaseNormallyDeprecated() {
 
         // given
         final MarketingInfo minfo = mock(MarketingInfo.class);
@@ -52,4 +54,21 @@ public class SaleStockCalculatorTest {
 
     }
 
+    @Test
+    public void increasesRequiredDuringSale() {
+
+        // given
+        MarketingSpec mspec = new MarketingSpec(Season.Spring);
+
+        final int normalLevel = 175;
+        final StockCalculator calc = new SaleStockCalculator();
+
+        // when
+        final int actual = calc.requiredStock(normalLevel, mspec);
+
+        assertEquals(normalLevel + 20, actual);
+
+    }
+
+    
 }
