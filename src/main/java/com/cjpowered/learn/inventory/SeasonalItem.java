@@ -19,8 +19,9 @@ public class SeasonalItem implements Item {
     @Override
     public int computeOrderQuantity(InventoryDatabase database, MarketingInfo marketingInfo, LocalDate when) {
         final int overrideLevel = 
-                (marketingInfo.onSale(this, when) ? 20 : 0)
-                + (marketingInfo.season(when).equals(season) ? requiredLevel : 0);
+                Math.max(
+                (marketingInfo.onSale(this, when) ? 20 : 0),
+                (marketingInfo.season(when).equals(season) ? requiredLevel : 0));
         return Math.max(0, requiredLevel + overrideLevel - database.onHand(this));
     }
 }
