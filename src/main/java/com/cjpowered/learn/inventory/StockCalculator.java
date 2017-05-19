@@ -17,18 +17,12 @@ public interface StockCalculator {
      * @param normalLevel
      *            the normal level to stock for the item
      *
-     * @param marketingInfo
-     *            marketing information service
-     *
-     * @param when
-     *            the date for which the required level is being calculated
+     * @param spec
+     *            marketing information
      *
      * @return the required level according to the rule being implemented or
      *         zero if the rule is not in effect for the arguments
      */
-    @Deprecated
-    int requiredStock(Item item, int normalLevel, MarketingInfo marketingInfo, LocalDate when);
-
     int requiredStock(int normalLevel, MarketingSpec spec);
     
 }
