@@ -5,11 +5,11 @@ import java.time.LocalDate;
 import com.cjpowered.learn.marketing.MarketingInfo;
 import com.cjpowered.learn.marketing.Season;
 
-public class SeasonalCalculator implements RequiredStockCalculator {
+public class SeasonalStockCalculator implements StockCalculator {
 
     private final Season season;
     
-    public SeasonalCalculator(Season season) {
+    public SeasonalStockCalculator(Season season) {
         this.season = season;
     }
     

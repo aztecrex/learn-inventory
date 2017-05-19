@@ -14,7 +14,7 @@ public class StockItem implements Item {
 
     final boolean firstDayOfMonthOnly;
 
-    final Set<RequiredStockCalculator> requiredStockCalculators;
+    final Set<StockCalculator> requiredStockCalculators;
 
     @Deprecated
     public StockItem(final int requiredLevel) {
@@ -23,14 +23,14 @@ public class StockItem implements Item {
 
     @Deprecated
     public StockItem(final int normalLevel, final boolean firstDayOfMonthOnly) {
-        this(normalLevel, Collections.singletonList(new OnSaleCalculator()), firstDayOfMonthOnly);
+        this(normalLevel, Collections.singletonList(new SaleStockCalculator()), firstDayOfMonthOnly);
     }
 
-    public StockItem(final int normalLevel, final Collection<RequiredStockCalculator> requiredStockCalculators) {
+    public StockItem(final int normalLevel, final Collection<StockCalculator> requiredStockCalculators) {
         this(normalLevel, requiredStockCalculators, false);
     }
 
-    public StockItem(final int normalLevel, final Collection<RequiredStockCalculator> requiredStockCalculators,
+    public StockItem(final int normalLevel, final Collection<StockCalculator> requiredStockCalculators,
             boolean firstDayOfMonthOnly) {
         this.normalLevel = normalLevel;
         this.requiredStockCalculators = new HashSet<>(requiredStockCalculators);
@@ -44,7 +44,7 @@ public class StockItem implements Item {
             return 0;
         
         int requiredLevel = 0;
-        for(RequiredStockCalculator calc : requiredStockCalculators) {
+        for(StockCalculator calc : requiredStockCalculators) {
             requiredLevel = Math.max(requiredLevel, calc.requiredStock(this, this.normalLevel, database, marketingInfo, when));
         }
 

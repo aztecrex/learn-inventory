@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import com.cjpowered.learn.inventory.InventoryDatabase;
 import com.cjpowered.learn.inventory.Item;
-import com.cjpowered.learn.inventory.RequiredStockCalculator;
+import com.cjpowered.learn.inventory.StockCalculator;
 import com.cjpowered.learn.inventory.StandardStockCalculator;
 import com.cjpowered.learn.marketing.MarketingInfo;
 
@@ -25,7 +25,7 @@ public class StandardStockCalculatorTest {
         final Item item = mock(Item.class);
 
         final int normalLevel = 175;
-        final RequiredStockCalculator calc = new StandardStockCalculator();
+        final StockCalculator calc = new StandardStockCalculator();
 
         // when
         final int actual = calc.requiredStock(item, normalLevel, db, minfo, today);

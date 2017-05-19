@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import com.cjpowered.learn.inventory.InventoryDatabase;
 import com.cjpowered.learn.inventory.Item;
-import com.cjpowered.learn.inventory.RequiredStockCalculator;
+import com.cjpowered.learn.inventory.StockCalculator;
 import com.cjpowered.learn.inventory.StockItem;
 import com.cjpowered.learn.marketing.MarketingInfo;
 
@@ -35,7 +35,7 @@ public class ItemTest {
         // given
         final int currentLevel = 7;
     
-        final RequiredStockCalculator calc1 = mock(RequiredStockCalculator.class);
+        final StockCalculator calc1 = mock(StockCalculator.class);
         when(calc1.requiredStock(any(), anyInt(), any(), any(), any())).thenReturn(currentLevel - 1);
         final Item item = new StockItem(20, Arrays.asList(calc1), false);
         when(db.onHand(item)).thenReturn(currentLevel);
@@ -54,10 +54,10 @@ public class ItemTest {
         // given
         final int currentLevel = 7;
     
-        final RequiredStockCalculator calc1 = mock(RequiredStockCalculator.class);
+        final StockCalculator calc1 = mock(StockCalculator.class);
         int calc1Return = 1000;
         when(calc1.requiredStock(any(), anyInt(), any(), any(), any())).thenReturn(calc1Return);
-        final RequiredStockCalculator calc2 = mock(RequiredStockCalculator.class);
+        final StockCalculator calc2 = mock(StockCalculator.class);
         when(calc2.requiredStock(any(), anyInt(), any(), any(), any())).thenReturn(calc1Return / 2);
         final Item item = new StockItem(20, Arrays.asList(calc1, calc2), false);
         when(db.onHand(item)).thenReturn(currentLevel);
@@ -76,7 +76,7 @@ public class ItemTest {
         // given
         final int currentLevel = 7;
     
-        final RequiredStockCalculator calc1 = mock(RequiredStockCalculator.class);
+        final StockCalculator calc1 = mock(StockCalculator.class);
         when(calc1.requiredStock(any(), anyInt(), any(), any(), any())).thenReturn(currentLevel);
         final Item item = new StockItem(20, Arrays.asList(calc1), false);
         when(db.onHand(item)).thenReturn(currentLevel);
