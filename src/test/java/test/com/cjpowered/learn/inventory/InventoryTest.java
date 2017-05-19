@@ -114,8 +114,8 @@ public class InventoryTest {
         Item item = new StockItem(requiredLevel);
         when(db.stockItems())
         .thenReturn(Collections.singletonList(item));
-        when(minfo.onSale(item, today)).thenReturn(true);
         when(db.onHand(item)).thenReturn(currentLevel);
+        when(minfo.onSale(item, today)).thenReturn(true);
         final InventoryManager im = new AceInventoryManager(db, minfo);
 
         // when
