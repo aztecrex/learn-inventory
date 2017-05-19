@@ -131,4 +131,67 @@ public class StockItemTest {
 
     }
 
+    @Test
+    public void orderInBulkNoneNeeded() {
+
+        // given
+        final int currentLevel = 7;
+        final int requiredLevel = 7;
+        final int bulkPackageSize = 5;
+
+        final StockCalculator calc = mock(StockCalculator.class);
+        when(calc.requiredStock(any(), anyInt(), any(), any())).thenReturn(requiredLevel);
+        final Item item = new StockItem(2 /* ignored */, Arrays.asList(calc), false, bulkPackageSize);
+        when(this.db.onHand(item)).thenReturn(currentLevel);
+
+        // when
+        final int actual = item.computeOrderQuantity(this.db, this.minfo, this.today);
+
+        // then
+        assertEquals(0, actual);
+
+    }
+
+    @Test
+    public void orderInBulkOnePackage() {
+
+        // given
+        final int currentLevel = 7;
+        final int bulkPackageSize = 5;
+        final int requiredLevel = currentLevel + bulkPackageSize;
+
+        final StockCalculator calc = mock(StockCalculator.class);
+        when(calc.requiredStock(any(), anyInt(), any(), any())).thenReturn(requiredLevel);
+        final Item item = new StockItem(2 /* ignored */, Arrays.asList(calc), false, bulkPackageSize);
+        when(this.db.onHand(item)).thenReturn(currentLevel);
+
+        // when
+        final int actual = item.computeOrderQuantity(this.db, this.minfo, this.today);
+
+        // then
+        assertEquals(requiredLevel - currentLevel, actual);
+
+    }
+
+    @Test
+    public void orderInBulkMultiplePackages() {
+
+        // given
+        final int currentLevel = 7;
+        final int bulkPackageSize = 5;
+        final int requiredLevel = currentLevel + 7 * bulkPackageSize;
+
+        final StockCalculator calc = mock(StockCalculator.class);
+        when(calc.requiredStock(any(), anyInt(), any(), any())).thenReturn(requiredLevel);
+        final Item item = new StockItem(2 /* ignored */, Arrays.asList(calc), false, bulkPackageSize);
+        when(this.db.onHand(item)).thenReturn(currentLevel);
+
+        // when
+        final int actual = item.computeOrderQuantity(this.db, this.minfo, this.today);
+
+        // then
+        assertEquals(requiredLevel - currentLevel, actual);
+
+    }
+
 }
