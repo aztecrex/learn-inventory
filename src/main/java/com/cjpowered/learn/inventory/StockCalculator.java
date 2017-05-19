@@ -26,6 +26,9 @@ public interface StockCalculator {
      * @return the required level according to the rule being implemented or
      *         zero if the rule is not in effect for the arguments
      */
+    @Deprecated
     int requiredStock(Item item, int normalLevel, MarketingInfo marketingInfo, LocalDate when);
 
+    int requiredStock(StockSpecification spec);
+    
 }

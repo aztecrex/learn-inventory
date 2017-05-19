@@ -10,12 +10,13 @@ import org.junit.Test;
 import com.cjpowered.learn.inventory.Item;
 import com.cjpowered.learn.inventory.StandardStockCalculator;
 import com.cjpowered.learn.inventory.StockCalculator;
+import com.cjpowered.learn.inventory.StockSpecification;
 import com.cjpowered.learn.marketing.MarketingInfo;
 
 public class StandardStockCalculatorTest {
 
     @Test
-    public void returnsNormalLevel() {
+    public void returnsNormalLevelDeprecated() {
 
         // given
         final MarketingInfo minfo = mock(MarketingInfo.class);
@@ -27,6 +28,21 @@ public class StandardStockCalculatorTest {
 
         // when
         final int actual = calc.requiredStock(item, normalLevel, minfo, today);
+
+        assertEquals(normalLevel, actual);
+
+    }
+
+    @Test
+    public void returnsNormalLevel() {
+
+        // given
+        final int normalLevel = 175;
+        final StockSpecification spec = new StockSpecification(normalLevel);
+        final StockCalculator calc = new StandardStockCalculator();
+
+        // when
+        final int actual = calc.requiredStock(spec);
 
         assertEquals(normalLevel, actual);
 

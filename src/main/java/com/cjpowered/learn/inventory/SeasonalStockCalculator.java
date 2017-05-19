@@ -19,4 +19,10 @@ public class SeasonalStockCalculator implements StockCalculator {
         return this.season == marketingInfo.season(when) ? normalLevel * 2 : 0;
     }
 
+    @Override
+    public int requiredStock(StockSpecification spec) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("NYI");
+    }
+
 }

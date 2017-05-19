@@ -12,4 +12,11 @@ public class StandardStockCalculator implements StockCalculator {
         return normalLevel;
     }
 
+    @Override
+    public int requiredStock(StockSpecification spec) {
+        
+        return spec.normalLevel;
+        
+    }
+
 }

@@ -12,4 +12,10 @@ public class SaleStockCalculator implements StockCalculator {
         return marketingInfo.onSale(item, when) ? normalLevel + 20 : 0;
     }
 
+    @Override
+    public int requiredStock(StockSpecification spec) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("NYI");
+    }
+
 }
