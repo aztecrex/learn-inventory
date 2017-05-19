@@ -15,7 +15,7 @@ public class SaleStockCalculatorTest {
     public void increasesRequiredDuringSale() {
 
         // given
-        MarketingSpec mspec = new MarketingSpec(Season.Spring, true);
+        final MarketingSpec mspec = new MarketingSpec(Season.Spring, true);
 
         final int normalLevel = 175;
         final StockCalculator calc = new SaleStockCalculator();
@@ -31,7 +31,7 @@ public class SaleStockCalculatorTest {
     public void zeroNormally() {
 
         // given
-        MarketingSpec mspec = new MarketingSpec(Season.Spring, false);
+        final MarketingSpec mspec = new MarketingSpec(Season.Spring, false);
 
         final int normalLevel = 175;
         final StockCalculator calc = new SaleStockCalculator();

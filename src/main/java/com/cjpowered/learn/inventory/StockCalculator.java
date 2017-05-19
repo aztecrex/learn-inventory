@@ -1,9 +1,5 @@
 package com.cjpowered.learn.inventory;
 
-import java.time.LocalDate;
-
-import com.cjpowered.learn.marketing.MarketingInfo;
-
 public interface StockCalculator {
 
     /**
@@ -24,5 +20,5 @@ public interface StockCalculator {
      *         zero if the rule is not in effect for the arguments
      */
     int requiredStock(int normalLevel, MarketingSpec spec);
-    
+
 }

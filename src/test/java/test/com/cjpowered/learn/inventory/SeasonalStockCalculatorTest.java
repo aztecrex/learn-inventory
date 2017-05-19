@@ -11,7 +11,6 @@ import com.cjpowered.learn.marketing.Season;
 
 public class SeasonalStockCalculatorTest {
 
-
     @Test
     public void increaseDuringSeason() {
 

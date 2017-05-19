@@ -11,7 +11,7 @@ public class SeasonalStockCalculator implements StockCalculator {
     }
 
     @Override
-    public int requiredStock(int normalLevel, MarketingSpec spec) {
+    public int requiredStock(final int normalLevel, final MarketingSpec spec) {
         return this.season == spec.season ? normalLevel * 2 : 0;
     }
 

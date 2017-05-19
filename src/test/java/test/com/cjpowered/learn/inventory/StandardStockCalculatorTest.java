@@ -11,7 +11,6 @@ import com.cjpowered.learn.marketing.Season;
 
 public class StandardStockCalculatorTest {
 
- 
     @Test
     public void returnsNormalLevel() {
 
