@@ -40,7 +40,7 @@ public class StockItemTest {
         final int currentLevel = 7;
 
         final StockCalculator calc1 = mock(StockCalculator.class);
-        when(calc1.requiredStock(any(), anyInt(), any(), any())).thenReturn(currentLevel - 1);
+        when(calc1.requiredStock(anyInt(), any())).thenReturn(currentLevel - 1);
         final Item item = new StockItem(20, 1, Arrays.asList(calc1), new AnyDay());
         when(this.db.onHand(item)).thenReturn(currentLevel);
 
@@ -101,7 +101,7 @@ public class StockItemTest {
         final int currentLevel = 7;
 
         final StockCalculator calc1 = mock(StockCalculator.class);
-        when(calc1.requiredStock(any(), anyInt(), any(), any())).thenReturn(currentLevel);
+        when(calc1.requiredStock(anyInt(), any())).thenReturn(currentLevel);
         final Item item = new StockItem(20, 1, Arrays.asList(calc1), new AnyDay());
         when(this.db.onHand(item)).thenReturn(currentLevel);
 
@@ -144,7 +144,7 @@ public class StockItemTest {
         final int bulkPackageSize = 5;
 
         final StockCalculator calc = mock(StockCalculator.class);
-        when(calc.requiredStock(any(), anyInt(), any(), any())).thenReturn(requiredLevel);
+        when(calc.requiredStock(anyInt(), any())).thenReturn(requiredLevel);
         final Item item = new StockItem(2 /* ignored */, bulkPackageSize, Arrays.asList(calc), new AnyDay());
         when(this.db.onHand(item)).thenReturn(currentLevel);
 
@@ -205,7 +205,7 @@ public class StockItemTest {
         final Schedule schedule = mock(Schedule.class);
         when(schedule.canOrder(any())).thenReturn(false);
         final StockCalculator calc = mock(StockCalculator.class);
-        when(calc.requiredStock(any(), anyInt(), any(), any())).thenReturn(1000);
+        when(calc.requiredStock(anyInt(), any())).thenReturn(1000);
         final Item item = new StockItem(2 /* ignored */ , 1, Arrays.asList(new StandardStockCalculator()), schedule);
 
         // when
