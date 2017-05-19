@@ -2,7 +2,6 @@ package com.cjpowered.learn.inventory;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,16 +14,6 @@ public class StockItem implements Item {
     final boolean firstDayOfMonthOnly;
 
     final Set<StockCalculator> requiredStockCalculators;
-
-    @Deprecated
-    public StockItem(final int requiredLevel) {
-        this(requiredLevel, false);
-    }
-
-    @Deprecated
-    public StockItem(final int normalLevel, final boolean firstDayOfMonthOnly) {
-        this(normalLevel, Collections.singletonList(new SaleStockCalculator()), firstDayOfMonthOnly);
-    }
 
     public StockItem(final int normalLevel, final Collection<StockCalculator> requiredStockCalculators) {
         this(normalLevel, requiredStockCalculators, false);
