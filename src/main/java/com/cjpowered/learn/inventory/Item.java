@@ -16,9 +16,9 @@ public interface Item {
      *
      * @param database
      * @param marketingInfo
-     *            TODO
+     *            marketing info service
      * @param when
-     *            TODO
+     *            date for which computation is being made
      * @return
      */
     int computeOrderQuantity(InventoryDatabase database, MarketingInfo marketingInfo, LocalDate when);
