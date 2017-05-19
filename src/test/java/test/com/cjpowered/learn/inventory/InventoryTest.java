@@ -225,7 +225,7 @@ public class InventoryTest {
         final LocalDate today = LocalDate.of(2112, 9, 1);
         int requiredLevel = 15;
         int currentLevel = 9;
-        Item item = new StockItem(requiredLevel);
+        Item item = new StockItem(requiredLevel, true);
         when(db.stockItems())
         .thenReturn(Collections.singletonList(item));
         when(db.onHand(item)).thenReturn(currentLevel);
@@ -238,6 +238,25 @@ public class InventoryTest {
         assertEquals(1, actual.size());
         assertEquals(item, actual.get(0).item);
         assertEquals(requiredLevel - currentLevel, actual.get(0).quantity);
+                
+    }
+    
+    @Test public void noOrderIfNotFirstDayOfMonth() {
+        // given
+        final LocalDate today = LocalDate.of(2112, 9, 2);
+        int requiredLevel = 15;
+        int currentLevel = 9;
+        Item item = new StockItem(requiredLevel, true);
+        when(db.stockItems())
+        .thenReturn(Collections.singletonList(item));
+        when(db.onHand(item)).thenReturn(currentLevel);
+        final InventoryManager im = new AceInventoryManager(db, minfo);
+
+        // when
+        final List<Order> actual = im.getOrders(today);
+        
+        // then
+        assertTrue(actual.isEmpty());
                 
     }
     
