@@ -41,12 +41,13 @@ public class InventoryTest {
     @Test public void orderToLevel() {
         // given
         final LocalDate today = LocalDate.now();
-        int requiredLevel = 15;
-        int currentLevel = 12;
+        final int requiredLevel = 15;
+        final int currentLevel = 12;
         Item item = new StockItem(requiredLevel);
         InventoryDatabase db = mock(InventoryDatabase.class);
         when(db.stockItems())
         .thenReturn(Collections.singletonList(item));
+        when(db.onHand(item)).thenReturn(currentLevel);
         final InventoryManager im = new AceInventoryManager(db);
         
         // when
@@ -59,4 +60,25 @@ public class InventoryTest {
         
     }
 
+    @Test public void overStocked() {
+        // given
+        final LocalDate today = LocalDate.now();
+        int requiredLevel = 15;
+        int currentLevel = 25;
+        InventoryDatabase db = mock(InventoryDatabase.class);
+        Item item = new StockItem(requiredLevel);
+        when(db.stockItems())
+        .thenReturn(Collections.singletonList(item));
+        when(db.onHand(item)).thenReturn(currentLevel);
+        final InventoryManager im = new AceInventoryManager(db);
+
+        // when
+        final List<Order> actual = im.getOrders(today);
+        
+        // then
+        assertTrue(actual.isEmpty());
+        
+        
+    }
+    
 }

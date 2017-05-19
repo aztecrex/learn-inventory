@@ -1,9 +1,8 @@
 package com.cjpowered.learn.inventory.ace;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import com.cjpowered.learn.inventory.InventoryDatabase;
 import com.cjpowered.learn.inventory.InventoryManager;
@@ -18,18 +17,20 @@ public final class AceInventoryManager implements InventoryManager {
         this.database = database;
     }
 
-    private Order computeOrder(Item item) {
-        return new Order(item, 3);
-    }
-
     @Override
     public List<Order> getOrders(final LocalDate today) {
 
-        final Stream<Order> orderStream = database.stockItems().stream().map(item -> {
-            return computeOrder(item);
-        });
+        final List<Item> items = database.stockItems();
+        final List<Order> orders = new ArrayList<>();
 
-        return orderStream.collect(Collectors.toList());
+        for (Item item : items) {
+            final int orderQuantity = item.computeOrderQuantity(database);
+            if (orderQuantity >= 0) {
+                final Order order = new Order(item, orderQuantity);
+                orders.add(order);
+            }
+        }
+        return orders;
 
     }
 

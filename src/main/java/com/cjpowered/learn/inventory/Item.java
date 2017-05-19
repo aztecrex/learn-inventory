@@ -7,4 +7,12 @@ package com.cjpowered.learn.inventory;
  */
 public interface Item {
 
+    /**
+     * Compute the order quantity.
+     * 
+     * @param database
+     * @return
+     */
+    int computeOrderQuantity(InventoryDatabase database);
+
 }

@@ -7,6 +7,11 @@ public class StockItem implements Item {
     public StockItem(int requiredLevel) {
         this.requiredLevel = requiredLevel;
     }
+
+    @Override
+    public int computeOrderQuantity(InventoryDatabase database) {
+        return requiredLevel - database.onHand(this);
+    }
     
     
 
