@@ -110,12 +110,12 @@ public class StockItemTest {
     }
 
     @Test
-    public void orderInBulk() {
+    public void orderInBulkInexact() {
 
         // given
         final int currentLevel = 7;
-        final int requiredLevel = 20;
         final int bulkPackageSize = 5;
+        final int requiredLevel = currentLevel + bulkPackageSize * 13 + 1;
 
         final StockCalculator calc = mock(StockCalculator.class);
         when(calc.requiredStock(any(), anyInt(), any(), any())).thenReturn(requiredLevel);
