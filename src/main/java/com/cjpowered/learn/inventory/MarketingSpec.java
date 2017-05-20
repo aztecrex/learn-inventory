@@ -23,5 +23,10 @@ public final class MarketingSpec {
         return Objects.equals(season, that.season) && Objects.equals(onSale, that.onSale);
     }
     
+    @Override
+    public int hashCode() {
+        return Objects.hash(season, onSale);
+    }
+    
 
 }

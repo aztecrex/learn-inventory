@@ -46,4 +46,15 @@ public class MarketingSpecTest {
         
     }
     
+    @Test public void compatibleHash() {
+        
+        // given
+        final MarketingSpec copy = new MarketingSpec(control.season, control.onSale);
+        
+        // then
+        assertEquals(control.hashCode(), copy.hashCode());
+        
+    }
+    
+    
 }
