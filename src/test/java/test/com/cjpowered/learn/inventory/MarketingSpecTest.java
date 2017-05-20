@@ -35,5 +35,15 @@ public class MarketingSpecTest {
         
     }
     
+    @Test public void symmetricEquality() {
+
+        // given
+        final MarketingSpec copy = new MarketingSpec(control.season, control.onSale);
+        
+        // then
+        assertTrue(copy.equals(control));
+
+        
+    }
     
 }
