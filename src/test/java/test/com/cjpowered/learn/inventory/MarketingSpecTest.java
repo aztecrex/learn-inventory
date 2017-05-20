@@ -18,7 +18,7 @@ public class MarketingSpecTest {
     
     @Test public void valueEquality() {
         // given
-        final MarketingSpec copy = new MarketingSpec(control.season, control.onSale);
+        final MarketingSpec copy = duplicate(control);
         
         // then
         assertTrue(control.equals(copy));
@@ -38,7 +38,7 @@ public class MarketingSpecTest {
     @Test public void symmetricEquality() {
 
         // given
-        final MarketingSpec copy = new MarketingSpec(control.season, control.onSale);
+        final MarketingSpec copy = duplicate(control);
         
         // then
         assertTrue(copy.equals(control));
@@ -49,7 +49,7 @@ public class MarketingSpecTest {
     @Test public void compatibleHash() {
         
         // given
-        final MarketingSpec copy = new MarketingSpec(control.season, control.onSale);
+        final MarketingSpec copy = duplicate(control);
         
         // then
         assertEquals(control.hashCode(), copy.hashCode());
@@ -59,11 +59,6 @@ public class MarketingSpecTest {
     @Test public void repeatableHash() {
         
         assertEquals(control.hashCode(), control.hashCode());
-    }
-    
-    private void require(boolean constraint) {
-        if (!constraint)
-            throw new RuntimeException("test is not valid");
     }
     
     @Test public void equalComparesSeason() {
@@ -91,5 +86,15 @@ public class MarketingSpecTest {
         assertFalse(partialCopy.equals(control));
         
     }
+    
+    private void require(boolean constraint) {
+        if (!constraint)
+            throw new RuntimeException("test is not valid");
+    }
+    
+    private MarketingSpec duplicate(MarketingSpec from) {
+        return new MarketingSpec(from.season, from.onSale);
+    }
+    
     
 }
