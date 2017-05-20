@@ -6,7 +6,7 @@ _not the only one :)_
 
 This is an example implementation of the CJ Learn Codeschool project,
 https://github.com/cjlearn/learn-inventory.  If you are a CJ Learn
-student and were assigned the inventory project, use this project
+student and were assigned the inventory project, use this solution
 for inspiration if you are really stuck but use it sparingly because;
 
 0. Part of learning is struggling to understand. That way you internalize
