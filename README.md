@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/aztecrex/learn-inventory.svg?branch=master)](https://travis-ci.org/aztecrex/learn-inventory)
 
-#CJ Learn Inventory Solution
+# CJ Learn Inventory Solution
 
 _not the only one :)_
 
