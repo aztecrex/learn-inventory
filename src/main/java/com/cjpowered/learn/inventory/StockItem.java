@@ -42,9 +42,9 @@ public class StockItem implements Item {
         this.schedule = schedule;
     }
 
-
     @Override
-    public int computeOrderQuantity(LocalDate when, InventoryStatus inventoryStatus, MarketingSpec marketingSpec) {
+    public int computeOrderQuantity(final LocalDate when, final InventoryStatus inventoryStatus,
+            final MarketingSpec marketingSpec) {
 
         if (!this.schedule.canOrder(when))
             return 0;

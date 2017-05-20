@@ -10,91 +10,98 @@ import com.cjpowered.learn.marketing.Season;
 public class MarketingSpecTest {
 
     final MarketingSpec control = new MarketingSpec(Season.Fall, true);
-    
-    @Test public void reflexiveReferenceEquality() {
-        
-        assertTrue(control.equals(control));
+
+    @Test
+    public void reflexiveReferenceEquality() {
+
+        assertTrue(this.control.equals(this.control));
     }
-    
-    @Test public void valueEquality() {
+
+    @Test
+    public void valueEquality() {
         // given
-        final MarketingSpec copy = duplicate(control);
-        
+        final MarketingSpec copy = duplicate(this.control);
+
         // then
-        assertTrue(control.equals(copy));
+        assertTrue(this.control.equals(copy));
     }
-    
-    @Test public void notEqualArbitrary() {
-        
-        assertFalse(control.equals("not a spec"));
+
+    @Test
+    public void notEqualArbitrary() {
+
+        assertFalse(this.control.equals("not a spec"));
     }
-    
-    @Test public void notEqualNull() {
-        
-        assertFalse(control.equals(null));
-        
+
+    @Test
+    public void notEqualNull() {
+
+        assertFalse(this.control.equals(null));
+
     }
-    
-    @Test public void symmetricEquality() {
+
+    @Test
+    public void symmetricEquality() {
 
         // given
-        final MarketingSpec copy = duplicate(control);
-        
-        // then
-        assertTrue(copy.equals(control));
+        final MarketingSpec copy = duplicate(this.control);
 
-        
-    }
-    
-    @Test public void compatibleHash() {
-        
-        // given
-        final MarketingSpec copy = duplicate(control);
-        
         // then
-        assertEquals(control.hashCode(), copy.hashCode());
-        
+        assertTrue(copy.equals(this.control));
+
     }
-    
-    @Test public void repeatableHash() {
-        
-        assertEquals(control.hashCode(), control.hashCode());
+
+    @Test
+    public void compatibleHash() {
+
+        // given
+        final MarketingSpec copy = duplicate(this.control);
+
+        // then
+        assertEquals(this.control.hashCode(), copy.hashCode());
+
     }
-    
-    @Test public void equalComparesSeason() {
-        
+
+    @Test
+    public void repeatableHash() {
+
+        assertEquals(this.control.hashCode(), this.control.hashCode());
+    }
+
+    @Test
+    public void equalComparesSeason() {
+
         // given
         final Season differentSeason = Season.Winter;
-        require(!differentSeason.equals(control.season));
-        final MarketingSpec partialCopy = new MarketingSpec(differentSeason, control.onSale);
-        
+        require(!differentSeason.equals(this.control.season));
+        final MarketingSpec partialCopy = new MarketingSpec(differentSeason, this.control.onSale);
+
         // then
-        assertFalse(control.equals(partialCopy));
-        assertFalse(partialCopy.equals(control));
-        
+        assertFalse(this.control.equals(partialCopy));
+        assertFalse(partialCopy.equals(this.control));
+
     }
-    
-    @Test public void equalComparesOnSale() {
-        
+
+    @Test
+    public void equalComparesOnSale() {
+
         // given
         final boolean differentOnSale = false;
-        require(differentOnSale != control.onSale);
-        final MarketingSpec partialCopy = new MarketingSpec(control.season, differentOnSale);
-        
+        require(differentOnSale != this.control.onSale);
+        final MarketingSpec partialCopy = new MarketingSpec(this.control.season, differentOnSale);
+
         // then
-        assertFalse(control.equals(partialCopy));
-        assertFalse(partialCopy.equals(control));
-        
+        assertFalse(this.control.equals(partialCopy));
+        assertFalse(partialCopy.equals(this.control));
+
     }
-    
-    private void require(boolean constraint) {
+
+    private void require(final boolean constraint) {
         if (!constraint)
             throw new RuntimeException("test is not valid");
     }
-    
-    private MarketingSpec duplicate(MarketingSpec from) {
+
+    private MarketingSpec duplicate(final MarketingSpec from) {
         return new MarketingSpec(from.season, from.onSale);
     }
-    
-    
+
 }

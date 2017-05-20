@@ -9,78 +9,84 @@ import com.cjpowered.learn.inventory.InventoryStatus;
 public class InventoryStatusTest {
 
     final InventoryStatus control = new InventoryStatus(1001);
-    
-    @Test public void reflexiveReferenceEquality() {
-        
-        assertTrue(control.equals(control));
+
+    @Test
+    public void reflexiveReferenceEquality() {
+
+        assertTrue(this.control.equals(this.control));
     }
-    
-    @Test public void valueEquality() {
+
+    @Test
+    public void valueEquality() {
         // given
-        final InventoryStatus copy = duplicate(control);
-        
+        final InventoryStatus copy = duplicate(this.control);
+
         // then
-        assertTrue(control.equals(copy));
+        assertTrue(this.control.equals(copy));
     }
-    
-    @Test public void notEqualArbitrary() {
-        
-        assertFalse(control.equals("not a spec"));
+
+    @Test
+    public void notEqualArbitrary() {
+
+        assertFalse(this.control.equals("not a spec"));
     }
-    
-    @Test public void notEqualNull() {
-        
-        assertFalse(control.equals(null));
-        
+
+    @Test
+    public void notEqualNull() {
+
+        assertFalse(this.control.equals(null));
+
     }
-    
-    @Test public void symmetricEquality() {
+
+    @Test
+    public void symmetricEquality() {
 
         // given
-        final InventoryStatus copy = duplicate(control);
-        
-        // then
-        assertTrue(copy.equals(control));
+        final InventoryStatus copy = duplicate(this.control);
 
-        
-    }
-    
-    @Test public void compatibleHash() {
-        
-        // given
-        final InventoryStatus copy = duplicate(control);
-        
         // then
-        assertEquals(control.hashCode(), copy.hashCode());
-        
+        assertTrue(copy.equals(this.control));
+
     }
-    
-    @Test public void repeatableHash() {
-        
-        assertEquals(control.hashCode(), control.hashCode());
+
+    @Test
+    public void compatibleHash() {
+
+        // given
+        final InventoryStatus copy = duplicate(this.control);
+
+        // then
+        assertEquals(this.control.hashCode(), copy.hashCode());
+
     }
-    
-    @Test public void equalComparesOnHand() {
-        
+
+    @Test
+    public void repeatableHash() {
+
+        assertEquals(this.control.hashCode(), this.control.hashCode());
+    }
+
+    @Test
+    public void equalComparesOnHand() {
+
         // given
         final int diffentOnHand = 3;
-        require(diffentOnHand != control.onHand);
+        require(diffentOnHand != this.control.onHand);
         final InventoryStatus partialCopy = new InventoryStatus(diffentOnHand);
-        
+
         // then
-        assertFalse(control.equals(partialCopy));
-        assertFalse(partialCopy.equals(control));
-        
+        assertFalse(this.control.equals(partialCopy));
+        assertFalse(partialCopy.equals(this.control));
+
     }
-    
-    private void require(boolean constraint) {
+
+    private void require(final boolean constraint) {
         if (!constraint)
             throw new RuntimeException("test is not valid");
     }
-    
-    private InventoryStatus duplicate(InventoryStatus from) {
+
+    private InventoryStatus duplicate(final InventoryStatus from) {
         return new InventoryStatus(from.onHand);
     }
-    
-    
+
 }

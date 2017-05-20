@@ -16,19 +16,17 @@ public final class MarketingSpec {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if ( this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj)
             return true;
         else if (obj instanceof MarketingSpec)
-            return ((MarketingSpec) obj).onSale == onSale && 
-                    ((MarketingSpec) obj).season.equals(season) ;
+            return ((MarketingSpec) obj).onSale == this.onSale && ((MarketingSpec) obj).season.equals(this.season);
         return false;
     }
-    
+
     @Override
     public int hashCode() {
-        return Objects.hash(season, onSale);
+        return Objects.hash(this.season, this.onSale);
     }
-    
 
 }

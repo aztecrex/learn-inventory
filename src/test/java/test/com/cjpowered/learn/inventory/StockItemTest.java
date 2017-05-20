@@ -70,6 +70,7 @@ public class StockItemTest {
         assertEquals(deficiency, actual);
 
     }
+
     @Test
     public void itemPicksLargestStockCalculation() {
 

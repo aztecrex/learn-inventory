@@ -29,11 +29,11 @@ public final class AceInventoryManager implements InventoryManager {
         final List<Item> items = this.database.stockItems();
         final List<Order> orders = new ArrayList<>();
 
-        final Season season = marketingInfo.season(when);
+        final Season season = this.marketingInfo.season(when);
 
         for (final Item item : items) {
-            final int onHand = database.onHand(item);
-            final boolean onSale = marketingInfo.onSale(item, when);
+            final int onHand = this.database.onHand(item);
+            final boolean onSale = this.marketingInfo.onSale(item, when);
             final InventoryStatus inventoryStatus = new InventoryStatus(onHand);
             final MarketingSpec marketingStatus = new MarketingSpec(season, onSale);
             final int orderQuantity = item.computeOrderQuantity(when, inventoryStatus, marketingStatus);

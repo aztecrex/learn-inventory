@@ -39,10 +39,7 @@ public final class Order {
 
     @Override
     public String toString() {
-      return new StringBuilder("Order ")
-      .append(item)
-      .append(" ").append(quantity)
-      .toString();
+        return new StringBuilder("Order ").append(this.item).append(" ").append(this.quantity).toString();
     }
-    
+
 }

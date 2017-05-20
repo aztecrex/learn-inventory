@@ -61,22 +61,22 @@ public class ManagerTest {
 
         // given
         final Season season = Season.Winter;
-        when(minfo.season(today)).thenReturn(season);
+        when(this.minfo.season(this.today)).thenReturn(season);
 
         final MarketingSpec mspec1 = new MarketingSpec(season, true);
         final InventoryStatus istat1 = new InventoryStatus(1000);
         final int quant1 = 15;
         final Item item1 = mock(Item.class);
-        when(db.onHand(item1)).thenReturn(istat1.onHand);
-        when(minfo.onSale(item1, today)).thenReturn(mspec1.onSale);
-        when(item1.computeOrderQuantity(today, istat1, mspec1)).thenReturn(quant1);
+        when(this.db.onHand(item1)).thenReturn(istat1.onHand);
+        when(this.minfo.onSale(item1, this.today)).thenReturn(mspec1.onSale);
+        when(item1.computeOrderQuantity(this.today, istat1, mspec1)).thenReturn(quant1);
         final MarketingSpec mspec2 = new MarketingSpec(season, false);
         final InventoryStatus istat2 = new InventoryStatus(25);
         final int quant2 = 17;
         final Item item2 = mock(Item.class);
-        when(db.onHand(item2)).thenReturn(istat2.onHand);
-        when(minfo.onSale(item2, today)).thenReturn(mspec2.onSale);
-        when(item2.computeOrderQuantity(today, istat2, mspec2)).thenReturn(quant2);
+        when(this.db.onHand(item2)).thenReturn(istat2.onHand);
+        when(this.minfo.onSale(item2, this.today)).thenReturn(mspec2.onSale);
+        when(item2.computeOrderQuantity(this.today, istat2, mspec2)).thenReturn(quant2);
 
         when(this.db.stockItems()).thenReturn(Arrays.asList(item1, item2));
         final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
@@ -85,8 +85,7 @@ public class ManagerTest {
         final List<Order> actual = im.getOrders(this.today);
 
         // then
-        final Set<Order> expected = new HashSet<>(
-                Arrays.asList(new Order(item1, quant1), new Order(item2, quant2)));
+        final Set<Order> expected = new HashSet<>(Arrays.asList(new Order(item1, quant1), new Order(item2, quant2)));
         assertEquals(expected, new HashSet<>(actual));
 
     }
@@ -97,7 +96,7 @@ public class ManagerTest {
         // given
         final Item item1 = mock(Item.class);
         when(item1.computeOrderQuantity(any(LocalDate.class), any(), any())).thenReturn(0);
-        
+
         final Item item2 = mock(Item.class);
         final int quant2 = 1000;
         when(item2.computeOrderQuantity(any(LocalDate.class), any(), any())).thenReturn(quant2);
@@ -105,12 +104,11 @@ public class ManagerTest {
         when(this.db.stockItems()).thenReturn(Arrays.asList(item1, item2));
         final InventoryManager im = new AceInventoryManager(this.db, this.minfo);
 
-        
         // when
         final List<Order> actual = im.getOrders(this.today);
 
         // then
-        assertEquals(Collections.singletonList(new Order(item2, quant2)),actual);
+        assertEquals(Collections.singletonList(new Order(item2, quant2)), actual);
 
     }
 
