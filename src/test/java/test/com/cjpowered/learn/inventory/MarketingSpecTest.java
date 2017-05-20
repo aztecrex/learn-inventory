@@ -61,4 +61,35 @@ public class MarketingSpecTest {
         assertEquals(control.hashCode(), control.hashCode());
     }
     
+    private void require(boolean constraint) {
+        if (!constraint)
+            throw new RuntimeException("test is not valid");
+    }
+    
+    @Test public void equalComparesSeason() {
+        
+        // given
+        final Season differentSeason = Season.Winter;
+        require(!differentSeason.equals(control.season));
+        final MarketingSpec partialCopy = new MarketingSpec(differentSeason, control.onSale);
+        
+        // then
+        assertFalse(control.equals(partialCopy));
+        assertFalse(partialCopy.equals(control));
+        
+    }
+    
+    @Test public void equalComparesOnSale() {
+        
+        // given
+        final boolean differentOnSale = false;
+        require(differentOnSale != control.onSale);
+        final MarketingSpec partialCopy = new MarketingSpec(control.season, differentOnSale);
+        
+        // then
+        assertFalse(control.equals(partialCopy));
+        assertFalse(partialCopy.equals(control));
+        
+    }
+    
 }
