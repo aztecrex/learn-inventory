@@ -19,6 +19,13 @@ other people's tests and source code. For each test, make sure you can
 describe what it proves. If you can't, bring it up in your next session as
 a discussion item.
 
+Note also that this implementation has only the latest tests and code. The
+current solution was derived after many iterations of red-green-refactor
+(take a look at the commit hitory, paying attention to how many lines have
+been deleted) and its current design is more code than is needed for the
+initial feature cycles and is thus wholly unsuitable for use during your
+own RGR cycles.
+
 For the project skeleton and assignment instructions, see
 [the cjlearn project](https://github.com/cjlearn/learn-inventory).
 
