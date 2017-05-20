@@ -56,5 +56,9 @@ public class MarketingSpecTest {
         
     }
     
+    @Test public void repeatableHash() {
+        
+        assertEquals(control.hashCode(), control.hashCode());
+    }
     
 }
