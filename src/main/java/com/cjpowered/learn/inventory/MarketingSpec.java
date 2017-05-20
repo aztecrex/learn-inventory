@@ -17,10 +17,12 @@ public final class MarketingSpec {
 
     @Override
     public boolean equals(Object obj) {
-        if (! ( obj instanceof MarketingSpec))
-            return false;
-        final MarketingSpec that = (MarketingSpec) obj;
-        return Objects.equals(season, that.season) && Objects.equals(onSale, that.onSale);
+        if ( this == obj)
+            return true;
+        else if (obj instanceof MarketingSpec)
+            return ((MarketingSpec) obj).onSale == onSale && 
+                    ((MarketingSpec) obj).season.equals(season) ;
+        return false;
     }
     
     @Override
