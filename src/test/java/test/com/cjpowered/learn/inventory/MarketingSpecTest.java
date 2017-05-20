@@ -29,4 +29,11 @@ public class MarketingSpecTest {
         assertFalse(control.equals("not a spec"));
     }
     
+    @Test public void notEqualNull() {
+        
+        assertFalse(control.equals(null));
+        
+    }
+    
+    
 }
