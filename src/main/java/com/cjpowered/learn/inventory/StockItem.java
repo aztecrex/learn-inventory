@@ -64,4 +64,21 @@ public class StockItem implements Item {
         return packages * this.packageSize;
 
     }
+
+    @Override
+    public int computeOrderQuantity(LocalDate when, InventoryStatus inventoryStatus, MarketingSpec marketingSpec) {
+
+        if (!this.schedule.canOrder(when))
+            return 0;
+
+        int requiredLevel = 0;
+        for (final StockCalculator calc : this.requiredStockCalculators) {
+            requiredLevel = Math.max(requiredLevel, calc.requiredStock(this.normalLevel, marketingSpec));
+        }
+
+        final int needed = Math.max(0, requiredLevel - inventoryStatus.onHand);
+
+        final int packages = needed / this.packageSize + (needed % this.packageSize == 0 ? 0 : 1);
+        return packages * this.packageSize;
+    }
 }

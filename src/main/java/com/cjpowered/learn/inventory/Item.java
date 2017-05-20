@@ -22,6 +22,9 @@ public interface Item {
      *            date for which computation is being made
      * @return the quantity to order. This will never be negative.
      */
+    @Deprecated
     int computeOrderQuantity(InventoryDatabase database, MarketingInfo marketingInfo, LocalDate when);
 
+    int computeOrderQuantity(LocalDate when, InventoryStatus inventoryStatus, MarketingSpec marketingSpec);
+    
 }
