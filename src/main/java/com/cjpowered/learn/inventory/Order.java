@@ -37,4 +37,12 @@ public final class Order {
         return Objects.hash(this.item, this.quantity);
     }
 
+    @Override
+    public String toString() {
+      return new StringBuilder("Order ")
+      .append(item)
+      .append(" ").append(quantity)
+      .toString();
+    }
+    
 }
