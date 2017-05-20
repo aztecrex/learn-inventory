@@ -1,5 +1,9 @@
 [![Build Status](https://travis-ci.org/aztecrex/learn-inventory.svg?branch=master)](https://travis-ci.org/aztecrex/learn-inventory)
 
+#CJ Learn Inventory Solution
+
+_not the only one :)_
+
 This is an example implementation of the CJ Learn Codeschool project,
 https://github.com/cjlearn/learn-inventory.  If you are a CJ Learn
 student and were assigned the inventory project, use this project
