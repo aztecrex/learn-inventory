@@ -1,5 +1,7 @@
 package com.cjpowered.learn.inventory;
 
+import java.util.Objects;
+
 import com.cjpowered.learn.marketing.Season;
 
 public final class MarketingSpec {
@@ -11,6 +13,12 @@ public final class MarketingSpec {
     public MarketingSpec(final Season season, final boolean onSale) {
         this.season = season;
         this.onSale = onSale;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        final MarketingSpec that = (MarketingSpec) obj;
+        return Objects.equals(season, that.season) && Objects.equals(onSale, that.onSale);
     }
 
 }
