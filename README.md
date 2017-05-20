@@ -11,7 +11,7 @@ then just use that code, it is likely that your understanding is
 superficial
 0. When you go to pair with a CJ engineer, your understanding of your own
 code will be expected. The questions you get about it may be subtle and
-you will want to know exactly why you made each line of your solution.
+you will want to know exactly why you wrote each line of your solution.
 
 If, instead, the inventory problem is being worked out in-class and your
 assignment is a different problem, use this project as practice for reading
