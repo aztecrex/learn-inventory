@@ -31,6 +31,6 @@ been deleted) and its current design is more code than is needed for the
 initial feature cycles and is thus wholly unsuitable for use during your
 own RGR cycles.
 
-For the project skeleton and assignment instructions, see
+For the project skeleton and project instructions, see
 [the cjlearn project](https://github.com/cjlearn/learn-inventory).
 
