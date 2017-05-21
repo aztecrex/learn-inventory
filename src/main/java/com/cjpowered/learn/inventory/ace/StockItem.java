@@ -1,9 +1,12 @@
-package com.cjpowered.learn.inventory;
+package com.cjpowered.learn.inventory.ace;
 
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
+import com.cjpowered.learn.inventory.Item;
+import com.cjpowered.learn.inventory.MarketingSpec;
 
 public class StockItem implements Item {
 

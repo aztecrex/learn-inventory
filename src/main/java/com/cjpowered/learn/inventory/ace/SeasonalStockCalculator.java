@@ -1,5 +1,6 @@
-package com.cjpowered.learn.inventory;
+package com.cjpowered.learn.inventory.ace;
 
+import com.cjpowered.learn.inventory.MarketingSpec;
 import com.cjpowered.learn.marketing.Season;
 
 public class SeasonalStockCalculator implements StockCalculator {

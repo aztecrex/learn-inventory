@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.cjpowered.learn.inventory.InventoryDatabase;
 import com.cjpowered.learn.inventory.InventoryManager;
-import com.cjpowered.learn.inventory.InventoryStatus;
 import com.cjpowered.learn.inventory.Item;
 import com.cjpowered.learn.inventory.MarketingSpec;
 import com.cjpowered.learn.inventory.Order;

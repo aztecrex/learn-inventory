@@ -1,4 +1,6 @@
-package com.cjpowered.learn.inventory;
+package com.cjpowered.learn.inventory.ace;
+
+import com.cjpowered.learn.inventory.MarketingSpec;
 
 public class StandardStockCalculator implements StockCalculator {
 

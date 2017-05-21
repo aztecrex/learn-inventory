@@ -1,12 +1,12 @@
-package test.com.cjpowered.learn.inventory;
+package test.com.cjpowered.learn.inventory.ace;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 import com.cjpowered.learn.inventory.MarketingSpec;
-import com.cjpowered.learn.inventory.StandardStockCalculator;
-import com.cjpowered.learn.inventory.StockCalculator;
+import com.cjpowered.learn.inventory.ace.StandardStockCalculator;
+import com.cjpowered.learn.inventory.ace.StockCalculator;
 import com.cjpowered.learn.marketing.Season;
 
 public class StandardStockCalculatorTest {

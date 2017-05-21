@@ -1,4 +1,4 @@
-package com.cjpowered.learn.inventory;
+package com.cjpowered.learn.inventory.ace;
 
 public final class InventoryStatus {
 

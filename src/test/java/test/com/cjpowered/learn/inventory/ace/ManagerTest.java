@@ -1,4 +1,4 @@
-package test.com.cjpowered.learn.inventory;
+package test.com.cjpowered.learn.inventory.ace;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -16,11 +16,11 @@ import org.junit.Test;
 
 import com.cjpowered.learn.inventory.InventoryDatabase;
 import com.cjpowered.learn.inventory.InventoryManager;
-import com.cjpowered.learn.inventory.InventoryStatus;
 import com.cjpowered.learn.inventory.Item;
 import com.cjpowered.learn.inventory.MarketingSpec;
 import com.cjpowered.learn.inventory.Order;
 import com.cjpowered.learn.inventory.ace.AceInventoryManager;
+import com.cjpowered.learn.inventory.ace.InventoryStatus;
 /*
  * We need to keep items in stock to prevent back orders. See the README.md
  * for the requirements.

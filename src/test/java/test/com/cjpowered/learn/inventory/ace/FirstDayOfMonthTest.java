@@ -1,4 +1,4 @@
-package test.com.cjpowered.learn.inventory;
+package test.com.cjpowered.learn.inventory.ace;
 
 import static org.junit.Assert.*;
 
@@ -6,8 +6,8 @@ import java.time.LocalDate;
 
 import org.junit.Test;
 
-import com.cjpowered.learn.inventory.FirstDayOfMonth;
-import com.cjpowered.learn.inventory.Schedule;
+import com.cjpowered.learn.inventory.ace.FirstDayOfMonth;
+import com.cjpowered.learn.inventory.ace.Schedule;
 
 public class FirstDayOfMonthTest {
 

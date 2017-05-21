@@ -2,6 +2,8 @@ package com.cjpowered.learn.inventory;
 
 import java.time.LocalDate;
 
+import com.cjpowered.learn.inventory.ace.InventoryStatus;
+
 /**
  * An item we can stock. Any instance data will be provided by by the database
  * when you invoke {@link InventoryDatabase#stockItems()}

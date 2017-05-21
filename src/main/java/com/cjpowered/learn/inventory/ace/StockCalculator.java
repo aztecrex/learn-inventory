@@ -1,4 +1,7 @@
-package com.cjpowered.learn.inventory;
+package com.cjpowered.learn.inventory.ace;
+
+import com.cjpowered.learn.inventory.Item;
+import com.cjpowered.learn.inventory.MarketingSpec;
 
 public interface StockCalculator {
 

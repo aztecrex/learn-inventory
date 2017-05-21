@@ -1,4 +1,4 @@
-package test.com.cjpowered.learn.inventory;
+package test.com.cjpowered.learn.inventory.ace;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -11,14 +11,14 @@ import java.util.Collections;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.cjpowered.learn.inventory.AnyDay;
-import com.cjpowered.learn.inventory.InventoryStatus;
 import com.cjpowered.learn.inventory.Item;
 import com.cjpowered.learn.inventory.MarketingSpec;
-import com.cjpowered.learn.inventory.Schedule;
-import com.cjpowered.learn.inventory.StandardStockCalculator;
-import com.cjpowered.learn.inventory.StockCalculator;
-import com.cjpowered.learn.inventory.StockItem;
+import com.cjpowered.learn.inventory.ace.AnyDay;
+import com.cjpowered.learn.inventory.ace.InventoryStatus;
+import com.cjpowered.learn.inventory.ace.Schedule;
+import com.cjpowered.learn.inventory.ace.StandardStockCalculator;
+import com.cjpowered.learn.inventory.ace.StockCalculator;
+import com.cjpowered.learn.inventory.ace.StockItem;
 import com.cjpowered.learn.marketing.Season;
 
 public class StockItemTest {
